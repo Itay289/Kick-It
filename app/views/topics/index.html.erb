@@ -2,15 +2,13 @@
 <div>
 	<h1>Topics</h1>
 </div>	
-
-
 <% @sub_topics.each do |sub_topic|%>
 <div class="media">
   <a class="pull-left" href="#">
     <img class="media-object" data-src="holder.js/64x64">
   </a>
   <div class="media-body">
-    <h4 class="media-heading"><a href="topics#show" ><%= sub_topic.title %></a></h4>
+    <h4 class="media-heading"><a href=<%= topic_path(sub_topic) %> ><%= sub_topic.title %></a></h4>
 		<%= sub_topic.desc %> 
   </div>
 </div>

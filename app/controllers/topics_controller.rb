@@ -16,7 +16,6 @@ class TopicsController < ApplicationController
 		@sub_topics = Sub_topic.new(params[:id])
 		if@Sub_topic.save
 			flash[:success] = "Subject created successfully"
-    	redirect_to 'Topics#index'
     else
     	render 'new'	
     end	
@@ -25,7 +24,6 @@ class TopicsController < ApplicationController
 	def destroy
 		@sub_topics = Sub_topic.find(params[:id]).destroy
 		flash[:success] = "Subject destroyed."
-    redirect_to 'Topics#index'
 	end
 
 	private

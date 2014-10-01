@@ -258,3 +258,9 @@ aside {
     line-height: 20px;
 	}
 }    
+
+.thumbnails:before, .thumbnails:after {
+  display: inline;
+  content: "";
+  line-height: 0;
+}
