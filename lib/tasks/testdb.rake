@@ -3,8 +3,8 @@ namespace :dbtest do
   task populate: :environment do
     clean_data
     update_topic
-    # update_sub_topic
-    # update_comments
+    update_sub_topic
+    update_comments
   end
 end
 

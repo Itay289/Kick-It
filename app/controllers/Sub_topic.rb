@@ -1,6 +1,6 @@
 class Sub_topic
 	include MongoMapper::Document
-	belongs_to :topic
+	# belongs_to :topic
 
 	key :title , String
 	key :created_by , String
