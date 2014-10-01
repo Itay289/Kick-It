@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
 
 	def show
-		@sub_topics = Sub_topic.find(params[:id])
+		@sub_topics = Sub_topic.all
 	end
 
 	def index
