@@ -1,12 +1,12 @@
 class SubtopicsController < ApplicationController
 
 	def show
+		puts params
 		@sub_topics = Sub_topic.find(params[:id])
 	end
 
 	def index
-		puts params
-		@sub_topics = Sub_topic.all(topic: params[:format])      #Person.all(:last_name => 'Nunemaker', :order => 'first_name')
+		@sub_topics = Sub_topic.all(topic: params[:topic_id])      #Person.all(:last_name => 'Nunemaker', :order => 'first_name')
 	end
 
 	def new
@@ -15,11 +15,9 @@ class SubtopicsController < ApplicationController
 
 	def create
 		@sub_topics = Sub_topic.new(params[:id])
-		if@Sub_topic.save
-			flash[:success] = "Subject created successfully"
-    else
-    	render 'new'	
-    end	
+		@Sub_topic.save
+		flash[:success] = "Subject created successfully"
+		redirect_to subtopics_path
 	end
 
 	def destroy
