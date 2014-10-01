@@ -10,7 +10,7 @@ class SubtopicsController < ApplicationController
 	end
 
 	def new
-		@sub_topics = Sub_topic.new
+		@subtopics = Sub_topic.new
 	end
 
 	def create
