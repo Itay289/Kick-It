@@ -1,0 +1,11 @@
+
+
+<%= form_for(@topics) do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title %><br />
+
+  <%= f.label :desc %>:
+  <%= f.text_field :desc %><br />
+
+  <%= f.submit %>
+<% end %>

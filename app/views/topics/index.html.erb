@@ -1,19 +1,16 @@
-<% provide(:title, 'Topics') %>
+<% provide(:title, 'Kick-It') %>
 <div>
-	<h1>Topics</h1>
+	<h1>Welcome</h1>
 </div>	
 
 <a href="topics#show" >"gggg"</a>
 
-<% @sub_topics.each do |sub_topic|%>
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64">
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading"><a href="topics#show" ><%= sub_topic.title %></a></h4>
-		<%= sub_topic.desc %> 
-  </div>
+<div class = "topic-read">
+	<ul class = "thumbnails">
+	<% @topics.each do |topic|%>
+	 <li class="span4"><%= topic.title %><a href= <%= subtopics_path(topic.title) %> class="thumbnail">
+    <img src= <%= topic.image %> alt=<%= "" %>>
+    </a></li>
+  </ul>  
+  <% end %>  
 </div>
-<%end%>
-
