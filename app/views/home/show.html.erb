@@ -18,8 +18,8 @@
 <div class = "topic-read">
 	<ul class = "thumbnails">
 	<% @topics.each do |topic|%>
-	 <li class="span4"><%= @topics[:topic][:title] %><a href="#" class="thumbnail">
-    <img src= <%= @topics[:topic][:image] %> alt=<%= "" %>>
+	 <li class="span4"><%= topic.title %><a href="#" class="thumbnail">
+    <img src= <%= topic.image %> alt=<%= "" %>>
     </a></li>
   </ul>  
   <% end %>  

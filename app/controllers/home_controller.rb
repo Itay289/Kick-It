@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
+	# include Db_handler
+	
 	def show
-		@topics = { :topic => {title: 'Bugs', image: "http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/HD-landscape-Photographs.png" } }  
+		@topics = Topic.all  
 
 # 		<div class = "topic-read">	
 # 		<ul class = "thumbnails">
