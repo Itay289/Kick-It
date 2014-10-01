@@ -17,7 +17,7 @@ class SubtopicsController < ApplicationController
 		@sub_topics = Sub_topic.new(params[:id])
 		@Sub_topic.save
 		flash[:success] = "Subject created successfully"
-		redirect_to subtopics_path
+		redirect_to topic_subtopics_path
 	end
 
 	def destroy
