@@ -2,7 +2,6 @@ class TopicsController < ApplicationController
 
 	def show
 		@sub_topics = Sub_topic.find(params[:id])
-    @comments = Sub_topic.comments
 	end
 
 	def index

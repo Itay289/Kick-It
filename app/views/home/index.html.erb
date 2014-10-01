@@ -1,0 +1,13 @@
+<% provide(:title, 'Kick-It') %>
+<div>
+	<h1>Welcome</h1>
+</div>	
+<div class = "topic-read">
+	<ul class = "thumbnails">
+	<% @topics.each do |topic|%>
+	 <li class="span4"><%= topic.title %><a href="topics#index" class="thumbnail">
+    <img src= <%= topic.image %> alt=<%= "" %>>
+    </a></li>
+  </ul>  
+  <% end %>  
+</div>
