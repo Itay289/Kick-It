@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 # use monfoDB as database 
 gem 'mongo_mapper'
 
+# use faker to create fake
+gem 'faker', '1.4.3'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -40,4 +43,3 @@ gem 'mongo_mapper'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
