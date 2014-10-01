@@ -1,12 +1,13 @@
-<div>
+<div class="row">
+	<div class="span6 offset3">
 
-<%= form_for(@subtopics) do |f| %>
-  <%= f.label :title %>:
-  <%= f.text_field :title %><br />
+		<%= form_for @sub_topics, url: new_topic_subtopic_path do |f| %>
+		  <%= f.label :title %>:
+		  <%= f.text_field :title %>
+		  <%= f.label :desc %>:
+		  <%= f.text_field :desc %>
+		  <%= f.submit "Create New Subject", class: "btn btn-large btn-primary" %>
 
-  <%= f.label :desc %>:
-  <%= f.text_field :desc %><br />
-
-  <%= f.submit %>
-<% end %>
-</div>
+		<% end %>
+	</div>
+</div>		
