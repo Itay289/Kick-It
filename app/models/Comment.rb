@@ -1,5 +1,5 @@
 class Comment
-	include MongoMapper::Document
+	include MongoMapper::EmbeddedDocument
 	# belongs_to :user
 
 	key :name , String

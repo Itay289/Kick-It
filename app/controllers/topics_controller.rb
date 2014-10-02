@@ -13,6 +13,8 @@ class TopicsController < ApplicationController
 	end
 
 	def create
+		puts "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+		puts params[:topic]
 		@topics = Topic.new(params[:topic])
 		@topics.save
 		flash[:success] = "Subject created successfully"

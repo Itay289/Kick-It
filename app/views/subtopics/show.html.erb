@@ -1,10 +1,19 @@
-<h1>Single Topic</h1>
+<h1><%= @sub_topic.title %></h1>
+<div>
+  <%= @sub_topic.desc %> 
+</div>
+<hr>
+<div><%= link_to 'Comment', new_topic_subtopic_comment_path(params[:id]) %></div>
 
+<% @sub_topic.comments.each do |comment|%>
+<div class="well well-small">
 <div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64">
-  </a>
   <div class="media-body">
-    <h4 class="media-heading"><%= @sub_topics.title %></h4>
-		<%= @sub_topics.desc %> 
- </div>
+    <%= comment.body %> <br>
+    <span class="pull-right">
+    posted <%= distance_of_time_in_words_to_now(comment.created_at) %> by <%= comment.name %>
+    </span>
+  </div>
+</div>
+</div>
+<%end%>

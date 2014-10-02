@@ -30,9 +30,8 @@ def clean_data
 	sub_topics = Sub_topic.all
 	sub_topics.each { |sub| sub.destroy()}
 
-	comments = Comment.all
-	comments.each { |com| com.destroy()}
-
+	# comments = Comment.all
+	# comments.each { |com| com.destroy()}
 end
 
 def update_users
@@ -73,7 +72,7 @@ def update_sub_topic
 			:title => Faker::Lorem.sentence,
 			:created_by => users.sample.mail,
 			:desc => Faker::Lorem.paragraph,
-			:users => { :mail => 'shahaf255@.com' , :vote => 1},
+			:users => [{ :mail => 'shahaf255@.com' , :vote => 1}],
 			:score => rand(-7..7),
 			:topic => topic.title,
 			})
@@ -87,13 +86,14 @@ def update_comments
 	sub_topics.each do |sub_topic|
 		sample_users = users.sample(rand(1..7))
 		sample_users.each do |user|
-			com = Comment.create({
-				:name => user.name,
-				:mail => user.mail,
-				:body => Faker::Lorem.sentence,
-				})
+      sub_topic.comments << Comment.new(
+        :name => user.name,
+        :mail => user.mail,
+        :body => Faker::Lorem.sentence,
+        )
+      sub_topic.save
 		end
 	end
-
+          #  Sub_topic.all(:conditions => {'comments.name' => 'shahaf'})
 end
 

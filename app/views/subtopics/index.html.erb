@@ -1,22 +1,27 @@
-<% provide(:title, 'Topics') %>
+<% provide(:title, 'Topicss') %>
 <div>
-	<h1>Topics</h1>
-</div>	
+	<h1><%= @topic.title %></h1>
+</div>
+<div class="pull-right">
+  created by <%= @topic.created_by %>
+</div>
+<br>
+<hr>	
 <div><%= link_to 'Write New Reddit', new_topic_subtopic_path %></div>
 
 <% @sub_topics.each do |sub_topic|%>
 <div class="well well-small">
 <div class="media">
   <span class="pull-left">
-    <a href='#'><i class="icon-large media-object icon-upload"></i></a>
+    <a href=<%= sub_topic.id.to_s + '/like' %>><i class="icon-large media-object icon-upload"></i></a>
     <%= sub_topic.score %>
-    <a href='#'><i class="icon-large media-object icon-download"></i></a>
+    <a href=<%= sub_topic.id.to_s + '/dislike' %>><i class="icon-large media-object icon-download"></i></a>
   </span>
   <div class="media-body">
     <h4 class="media-heading"><a href=<%= topic_subtopic_path(params[:topic_id], sub_topic.id) %> ><%= sub_topic.title %></a></h4>
 		<%= sub_topic.desc %> <br>
     <span class="pull-right">
-    created at <%= sub_topic.created_at%> by <% sub_topic.created_by %>
+    created <%= distance_of_time_in_words_to_now(sub_topic.created_at) %> by <%= sub_topic.created_by %>
     </span>
   </div>
 </div>

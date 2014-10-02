@@ -1,21 +1,28 @@
 class SubtopicsController < ApplicationController
+  helper_method :change_score
 
 	def show
-		puts params
-		@sub_topics = Sub_topic.find(params[:id])
+		@sub_topic = Sub_topic.find(params[:id])
 	end
 
 	def index
-		@sub_topics = Sub_topic.all(topic: params[:topic_id])      #Person.all(:last_name => 'Nunemaker', :order => 'first_name')
+      @sub_topics = Sub_topic.all(topic: params[:topic_id])
+      @topic = Topic.find_by_title(params[:topic_id])
 	end
 
-	def new
-		@subtopics = Sub_topic.new
+  def new
+    @topic = Topic.find_by_title(params[:topic_id])
+    @subtopic = Sub_topic.new()
 	end
 
 	def create
-		@sub_topics = Sub_topic.new(params[:id])
-		@Sub_topic.save
+    args = params[:sub_topic]
+    args[:topic] = params[:topic_id]
+    # TODO : change created_by to the user -> params[:session][:mail]
+    args[:created_by] = "me"
+    @sub_topic = Sub_topic.new(args)
+		@sub_topic.save
+    puts @sub_topic.inspect()
 		flash[:success] = "Subject created successfully"
 		redirect_to topic_subtopics_path
 	end
@@ -24,6 +31,10 @@ class SubtopicsController < ApplicationController
 		@sub_topics = Sub_topic.find(params[:id]).destroy
 		flash[:success] = "Subject destroyed."
 	end
+
+  def change_score(item_id , interval)
+
+  end
 
 	private
 
