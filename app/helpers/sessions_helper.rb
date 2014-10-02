@@ -1,7 +1,7 @@
 module SessionsHelper
 
 	def sign_in(user)
-		cookies.permanent[:email] = user.remember_token
+		cookies.permanent[:email] = user.mail
 		self.current_user =  user
 	end
 
