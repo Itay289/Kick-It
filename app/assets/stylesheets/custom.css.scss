@@ -253,15 +253,5 @@ aside {
   max-width: 100%;
   height: 270px;
   width: 360px;
-  a.thumbnail {
-    display: inline-block;
-    line-height: 20px;
-	}
+  line-height: 20px;
 }    
-
-.thumbnails:before, .thumbnails:after {
-  display: inline;
-  content: "";
-  line-height: 0;
-}
-
