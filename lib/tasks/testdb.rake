@@ -36,22 +36,18 @@ def clean_data
 end
 
 def update_users
+	names = []
 	5.times do 
-		name = Faker::Name.first_name
+		names.push(Faker::Name.first_name)
+	end
+	names.push('shahaf','itay')
+
+	names.each do |name|
 		user = User.create({
 			:name => name,
 			:mail => name + '@ftbpro.com',
 			})
 	end
-
-	user = User.create({
-		:name => 'Itay',
-		:mail => 'itay@ftbpro.com',
-		})
-	user = User.create({
-		:name => 'shahaf',
-		:mail => 'shahaf@ftbpro.com',
-		})
 end
 
 def update_topic
