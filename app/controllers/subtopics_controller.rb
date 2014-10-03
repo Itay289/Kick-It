@@ -2,12 +2,16 @@ class SubtopicsController < ApplicationController
   helper_method :change_score
 
 	def show
-		@sub_topic = Sub_topic.find(params[:id])
+    @topic = Topic.find_by_title(params[:topic_id])
+    @sub_topic = @topic.subtopics
+    puts "hhhhhhh"
+    puts @sub_topic
+    # @comments = @sub_topic.comments
 	end
 
 	def index
-      @sub_topics = Sub_topic.all(topic: params[:topic_id])
       @topic = Topic.find_by_title(params[:topic_id])
+      @sub_topics = @topic.subtopics
 	end
 
   def new
