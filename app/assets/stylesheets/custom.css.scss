@@ -255,3 +255,18 @@ aside {
   width: 360px;
   line-height: 20px;
 }    
+
+.comments {
+  float: left;
+  .text {
+    width: 400px;
+  }
+}
+.desc {
+  border-bottom: solid 1px;
+  padding-bottom: 20px;
+}
+.comment-headline {
+  text-align: left;
+  margin-top: 50px;
+}

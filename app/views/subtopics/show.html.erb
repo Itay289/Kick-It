@@ -1,19 +1,5 @@
 <h1><%= @sub_topic.title %></h1>
-<div>
+<div class="desc">
   <%= @sub_topic.desc %> 
 </div>
-<hr>
-<div><%= link_to 'Comment', new_topic_subtopic_comment_path(params[:id]) %></div>
-
-<% @sub_topic.comments.each do |comment|%>
-<div class="well well-small">
-<div class="media">
-  <div class="media-body">
-    <%= comment.body %> <br>
-    <span class="pull-right">
-    posted <%= distance_of_time_in_words_to_now(comment.created_at) %> by <%= comment.name %>
-    </span>
-  </div>
-</div>
-</div>
-<%end%>
+<%= render partial: 'comments/comment' %>

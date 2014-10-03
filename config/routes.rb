@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   resources :topics do
   	resources :subtopics do
-      resources :comments
-    end
+  		resources :comments
+  	end	
   end	
+
+  resources :comments
 
   resources :sessions
   
