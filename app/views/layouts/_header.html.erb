@@ -6,7 +6,7 @@
        	<ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>
-            <li><a><%= "Hello #{current_user.mail}" %></a></li>
+            <li><a><%= "Wellcome #{current_user.mail}" %></a></li>
           <% else %>
             <li><%= link_to "Sign in", new_session_path %></li>
           <% end %>  
