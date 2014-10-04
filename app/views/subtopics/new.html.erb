@@ -4,9 +4,9 @@
 		<h2>Create New Reddit</h2>
 
 		<%= form_for ([@topic,@subtopic]) ,url: topic_subtopics_path(@topic.title) , html: { method: :post } do |f| %>
-		  <%= f.label :title %>:
+		  <%= f.label :title %>
 		  <%= f.text_field :title %>
-		  <%= f.label :desc %>:
+		  <%= f.label :desc %>
 		  <%= f.text_field :desc %>
 		  <%= f.submit "Create New Reddit", class: "btn btn-large btn-primary" %>
 		<% end %>
