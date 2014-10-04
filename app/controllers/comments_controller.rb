@@ -5,8 +5,8 @@ class CommentsController < ApplicationController
   end  
 
   def create
-    @subtopic = Sub_topic.find(params[:subtopic_id])
-    @comment = Comment.create(comment_params)
+    @subtopic = Sub_topic.find(params[:id])
+    @comment = @subtopic.comment.create(comment_params)
     if @comment.save
       flash[:notice] = "your comment #{@comment.body } has been saved"
     end
@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:user, :body)
+      params.require(:comment).permit(:mail, :body, :name)
     end
     
 end
