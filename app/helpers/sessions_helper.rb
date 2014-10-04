@@ -21,6 +21,11 @@ module SessionsHelper
 		user == current_user
 	end
 
+	def sign_out
+		self.current_user = nil
+		cookies.delete(:mail)
+	end
+
 	def store_location
 		session[:return_to] = request.fullpath
 	end

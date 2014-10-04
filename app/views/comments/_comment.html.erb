@@ -16,10 +16,12 @@
 
 <% Comment.all.each_with_index do |comment,i| %>
   <div class="small"> 
-    <p><%= (i + 1).to_s + "." %></p>
-    <p><%= comment.name %></p>
-    <p><strong>Comment: </strong><%= comment.body %></p>
-    <%= comment.created_at.strftime("%m/%d/%Y") %>
+    <ul>
+      <li><%= (i + 1).to_s + "." %></li>
+      <li><strong><%= comment.name %></strong></li>
+      <li><%= comment.body %></li>
+      <li><%= comment.created_at.strftime("%m/%d/%Y") %></li>
+    </ul>
   </div> 
    
 <% end %>
