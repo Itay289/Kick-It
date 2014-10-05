@@ -7,8 +7,8 @@
 <div class = "topic-read">
 	<ul class = "thumbnails">
 		<% @topics.each do |topic|%>
-		 	<li class="span4"><%= topic.title %><a href= <%= topic_subtopics_path(topic.title) %> class="thumbnail"	>
-	    	<img src= <%= topic.image %> alt=<%= "" %>>
+		 	<li class="span4"><%= topic.title %><a href= <%= topic_subtopics_path(topic_id: topic.title) %> class="thumbnail"	>
+	    	<%= image_tag topic.image.to_s %>
 	    </a></li>
     <% end %>
   </ul>    
