@@ -16,9 +16,8 @@ class TopicsController < ApplicationController
 	def create
 		uploader = ImageUploader.new
 		uploader.store!(params[:topic][:image])
-
 		@topic = Topic.new(
-			:title => params[:title],
+			:title => params[:topic][:title],
 			:image => uploader.url,
 			:created_by => "stam",
 			)
