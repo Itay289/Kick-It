@@ -41,18 +41,4 @@ class SubtopicsController < ApplicationController
 
   end
 
-	private
-
-    def signed_in_user
-      unless signed_in?
-        store_location # set at the session helper
-        redirect_to signin_path, notice: "Please sign in." unless signed_in?
-      end  
-    end
-
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to root_path unless current_user?(@user)
-    end
-	
 end
