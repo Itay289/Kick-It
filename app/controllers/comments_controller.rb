@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
 	def new 
     @topic = Topic.find_by_title(params[:topic_id])
-    @subtopics = @topic.subtopics
+    @subtopics = @topic.sub_topics
     @subtopic = nil
     @subtopics.each do |sub_t|
       if sub_t.id.to_s == params[:id]
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   def create
     puts cookies
     @topic = Topic.find_by_title(params[:topic_id])
-    subtopics = @topic.subtopics
+    subtopics = @topic.sub_topics
     @subtopic = nil
     subtopics.each do |sub_t|
       if sub_t.id.to_s == params[:id]
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
       )
     @subtopic.comments << comment
     @topic.save
-    redirect_to topic_subtopic_path(:id => @subtopic.id)
+    redirect_to topic_sub_topic_path(:id => @subtopic.id)
   end
 
   def index

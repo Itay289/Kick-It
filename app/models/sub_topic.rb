@@ -1,4 +1,4 @@
-class Subtopic
+class SubTopic
 	include MongoMapper::EmbeddedDocument
   many :comments
 

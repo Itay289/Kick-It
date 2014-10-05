@@ -2,7 +2,7 @@
   
   <h2 class="comment-headline">Add a comment:</h2>
 
-  <%= form_for Comment.new ,url: topic_subtopic_comments_path(:subtopic_id => @sub_topic.id , :id => @sub_topic.id) , html: { method: :post } do |f| %>
+  <%= form_for Comment.new ,url: topic_sub_topic_comments_path(:sub_topic_id => @sub_topic.id , :id => @sub_topic.id) , html: { method: :post } do |f| %>
     <div class="text">
       <p><%= f.label :body %><br>
         <%= f.text_area :body %></p>
