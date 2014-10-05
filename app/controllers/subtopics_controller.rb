@@ -3,7 +3,15 @@ class SubtopicsController < ApplicationController
 
 	def show
     @topic = Topic.find_by_title(params[:topic_id])
-    @sub_topic = @topic.subtopics
+    @sub_topics = @topic.subtopics
+    @sub_topic = nil
+    @sub_topics.each do |sub_t|
+      puts "vvvvvvvvvvvv"
+      puts sub_t.title
+      if sub_t.id == params[:id]
+        @sub_topic = sub_t
+      end
+    end
     puts "hhhhhhh"
     puts @sub_topic
     # @comments = @sub_topic.comments
