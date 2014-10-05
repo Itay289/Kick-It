@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
       end
     end
     @comment = Comment.new
+    das
   end  
 
   def create
