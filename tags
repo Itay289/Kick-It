@@ -1,0 +1,61 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Application	/Users/erez/workspace/Kick-It/config/application.rb	/^  class Application < Rails::Application$/;"	c	class:KickIt
+ApplicationController	/Users/erez/workspace/Kick-It/app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	/Users/erez/workspace/Kick-It/app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+Comment	/Users/erez/workspace/Kick-It/app/controllers/Comment.rb	/^class Comment$/;"	c
+Comment	/Users/erez/workspace/Kick-It/app/models/Comment.rb	/^class Comment$/;"	c
+CommentsController	/Users/erez/workspace/Kick-It/app/controllers/comments_controller.rb	/^class CommentsController < ApplicationController$/;"	c
+CommentsHelper	/Users/erez/workspace/Kick-It/app/helpers/comments_helper.rb	/^module CommentsHelper$/;"	m
+HomeController	/Users/erez/workspace/Kick-It/app/controllers/home_controller.rb	/^class HomeController < ApplicationController$/;"	c
+HomeHelper	/Users/erez/workspace/Kick-It/app/helpers/home_helper.rb	/^module HomeHelper$/;"	m
+ImageUploader	/Users/erez/workspace/Kick-It/app/uploaders/image_uploader.rb	/^class ImageUploader < CarrierWave::Uploader::Base$/;"	c
+KickIt	/Users/erez/workspace/Kick-It/config/application.rb	/^module KickIt$/;"	m
+SessionsController	/Users/erez/workspace/Kick-It/app/controllers/sessions_controller.rb	/^class SessionsController < ApplicationController$/;"	c
+SessionsHelper	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^module SessionsHelper$/;"	m
+Subtopic	/Users/erez/workspace/Kick-It/app/models/subtopic.rb	/^class Subtopic$/;"	c
+SubtopicsController	/Users/erez/workspace/Kick-It/app/controllers/subtopics_controller.rb	/^class SubtopicsController < ApplicationController$/;"	c
+Topic	/Users/erez/workspace/Kick-It/app/models/Topic.rb	/^class Topic$/;"	c
+TopicsController	/Users/erez/workspace/Kick-It/app/controllers/topics_controller.rb	/^class TopicsController < ApplicationController$/;"	c
+TopicsHelper	/Users/erez/workspace/Kick-It/app/helpers/topics_helper.rb	/^module TopicsHelper$/;"	m
+User	/Users/erez/workspace/Kick-It/app/models/User.rb	/^class User$/;"	c
+bootstrap_class_for	/Users/erez/workspace/Kick-It/app/helpers/application_helper.rb	/^  def bootstrap_class_for flash_type$/;"	f	class:ApplicationHelper
+change_score	/Users/erez/workspace/Kick-It/app/controllers/subtopics_controller.rb	/^  def change_score(item_id , interval)$/;"	f	class:SubtopicsController
+clean_data	/Users/erez/workspace/Kick-It/lib/tasks/testdb.rake	/^def clean_data$/;"	f
+comment_params	/Users/erez/workspace/Kick-It/app/controllers/comments_controller.rb	/^    def comment_params$/;"	f	class:CommentsController
+correct_user	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^  def correct_user$/;"	f	class:SessionsHelper
+create	/Users/erez/workspace/Kick-It/app/controllers/comments_controller.rb	/^  def create$/;"	f	class:CommentsController
+create	/Users/erez/workspace/Kick-It/app/controllers/sessions_controller.rb	/^	def create$/;"	f	class:SessionsController
+create	/Users/erez/workspace/Kick-It/app/controllers/subtopics_controller.rb	/^	def create$/;"	f	class:SubtopicsController
+create	/Users/erez/workspace/Kick-It/app/controllers/topics_controller.rb	/^	def create$/;"	f	class:TopicsController
+current_user	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^	def current_user$/;"	f	class:SessionsHelper
+current_user=	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^	def current_user=(user)$/;"	f	class:SessionsHelper
+current_user?	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^	def current_user?(user)$/;"	f	class:SessionsHelper
+destroy	/Users/erez/workspace/Kick-It/app/controllers/sessions_controller.rb	/^	def destroy$/;"	f	class:SessionsController
+destroy	/Users/erez/workspace/Kick-It/app/controllers/subtopics_controller.rb	/^	def destroy$/;"	f	class:SubtopicsController
+full_title	/Users/erez/workspace/Kick-It/app/helpers/application_helper.rb	/^  def full_title(page_title)$/;"	f	class:ApplicationHelper
+index	/Users/erez/workspace/Kick-It/app/controllers/comments_controller.rb	/^  def index$/;"	f	class:CommentsController
+index	/Users/erez/workspace/Kick-It/app/controllers/home_controller.rb	/^	def index$/;"	f	class:HomeController
+index	/Users/erez/workspace/Kick-It/app/controllers/subtopics_controller.rb	/^	def index$/;"	f	class:SubtopicsController
+index	/Users/erez/workspace/Kick-It/app/controllers/topics_controller.rb	/^	def index$/;"	f	class:TopicsController
+new	/Users/erez/workspace/Kick-It/app/controllers/comments_controller.rb	/^	def new $/;"	f	class:CommentsController
+new	/Users/erez/workspace/Kick-It/app/controllers/sessions_controller.rb	/^	def new$/;"	f	class:SessionsController
+new	/Users/erez/workspace/Kick-It/app/controllers/subtopics_controller.rb	/^  def new$/;"	f	class:SubtopicsController
+new	/Users/erez/workspace/Kick-It/app/controllers/topics_controller.rb	/^	def new$/;"	f	class:TopicsController
+show	/Users/erez/workspace/Kick-It/app/controllers/home_controller.rb	/^	def show$/;"	f	class:HomeController
+show	/Users/erez/workspace/Kick-It/app/controllers/subtopics_controller.rb	/^	def show$/;"	f	class:SubtopicsController
+show	/Users/erez/workspace/Kick-It/app/controllers/topics_controller.rb	/^	def show$/;"	f	class:TopicsController
+sign_in	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^	def sign_in(user)$/;"	f	class:SessionsHelper
+sign_out	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^	def sign_out$/;"	f	class:SessionsHelper
+signed_in?	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^	def signed_in?$/;"	f	class:SessionsHelper
+signed_in_user	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^  def signed_in_user$/;"	f	class:SessionsHelper
+store_dir	/Users/erez/workspace/Kick-It/app/uploaders/image_uploader.rb	/^  def store_dir$/;"	f	class:ImageUploader
+store_location	/Users/erez/workspace/Kick-It/app/helpers/sessions_helper.rb	/^	def store_location$/;"	f	class:SessionsHelper
+update_comments	/Users/erez/workspace/Kick-It/lib/tasks/testdb.rake	/^def update_comments$/;"	f
+update_sub_topic	/Users/erez/workspace/Kick-It/lib/tasks/testdb.rake	/^def update_sub_topic$/;"	f
+update_topic	/Users/erez/workspace/Kick-It/lib/tasks/testdb.rake	/^def update_topic$/;"	f
+update_users	/Users/erez/workspace/Kick-It/lib/tasks/testdb.rake	/^def update_users$/;"	f
