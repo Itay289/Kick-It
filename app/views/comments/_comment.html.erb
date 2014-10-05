@@ -1,0 +1,30 @@
+<div class="comments">
+  
+  <h2 class="comment-headline">Add a comment:</h2>
+
+  <%= form_for ([@comment, Comment.new]) do |f| %>
+    <div class="text">
+      <p><%= f.label :name %><br>
+        <%= f.text_field :name %></p>
+      <p><%= f.label :body %><br>
+        <%= f.text_area :body %></p>
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>  
+    </div>
+  <% end %>  
+
+  <h2 class="comment-headline"><%= Comment.count %> Comments:</h2>
+
+<% Comment.all.each_with_index do |comment,i| %>
+  <div class="small"> 
+    <ul>
+      <li><%= (i + 1).to_s + "." %></li>
+      <li><strong><%= comment.name %></strong></li>
+      <li><%= comment.body %></li>
+      <li><%= comment.created_at.strftime("%m/%d/%Y") %></li>
+    </ul>
+  </div> 
+   
+<% end %>
+
+
+</div>

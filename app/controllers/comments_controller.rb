@@ -1,32 +1,28 @@
 class CommentsController < ApplicationController
 
-	def show 
+	def new 
     @comment = Comment.new
-  end 
-
-  def new
-    @comment = Comment.new()
-  end 
+  end  
 
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
+    @subtopic = Sub_topic.find(params[:id])
+    @comment = @subtopic.comment.create(comment_params)
     if @comment.save
       flash[:notice] = "your comment #{@comment.body } has been saved"
     end
-      redirect_to post_path(@post)  
+    redirect_to root_path
   end
 
   def index
-    @comment = Comment.all
+    @comment = Comment.all(subtopic: params[:subtopic_id])
     if @comment > 0
       Comment.count
      end 
   end
 
-  # private
-  #   def comment_params
-  #     params.require(:comment).permit(:user, :body)
-  #   end
-
+  private
+    def comment_params
+      params.require(:comment).permit(:mail, :body, :name)
+    end
+    
 end

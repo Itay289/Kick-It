@@ -1,7 +1,7 @@
 module SessionsHelper
 
 	def sign_in(user)
-		cookies.permanent[:email] = user.mail
+		cookies.permanent[:mail] = user.mail
 		self.current_user =  user
 	end
 
@@ -14,7 +14,7 @@ module SessionsHelper
 	end
 
 	def current_user
-		@current_user ||= User.find_by_remember_token(cookies[:email]) if cookies[:email]
+		@current_user ||= User.find_by_mail(cookies[:mail]) if cookies[:mail]
 	end
 
 	def current_user?(user)
@@ -23,16 +23,11 @@ module SessionsHelper
 
 	def sign_out
 		self.current_user = nil
-		cookies.delete(:email)
+		cookies.delete(:mail)
 	end
 
 	def store_location
 		session[:return_to] = request.fullpath
-	end
-
-	def redirect_back_or(default)
-		redirect_to(session[:return_to] || default)
-		session.delete(:return_to)
 	end
 
   def signed_in_user
