@@ -8,10 +8,11 @@
 
 		  <%= f.label :title %>
 		  <%= f.text_field :title %>
-		  <%= f.label :image %>
-		  <%= f.text_field :image %>
 			<%= f.submit "Create New Topic", class: "btn btn-large btn-primary" %>
-
+			<p>
+				<%= f.file_field :image %>
+			</p>
+			
 		<% end %>
 		
 	</div>
