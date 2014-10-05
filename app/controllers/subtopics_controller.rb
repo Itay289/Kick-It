@@ -1,5 +1,6 @@
 class SubtopicsController < ApplicationController
   helper_method :change_score
+  before_filter :signed_in_user, only: [:new]
 
 	def show
     @topic = Topic.find_by_title(params[:topic_id])
