@@ -21,13 +21,11 @@ class SubtopicsController < ApplicationController
 
   def new
     @topic = Topic.find_by_title(params[:topic_id])
-    @subtopic = Sub_topic.new()
-    @comment.new()
+    @subtopic = Sub_topic.new
+    @comment.new
 	end
 
 	def create
-    puts "ggggggggggg"
-    puts params
     @topic = Topic.find_by_title(params[:topic_id])
     # TODO : change created_by to the user -> params[:session][:mail]
     sub_topic = Subtopic.new(

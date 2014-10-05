@@ -7,9 +7,12 @@ Rails.application.routes.draw do
     	resources :comments
     end
   end
+
+  resources :comments
   
   resources :sessions
   
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signin', to: 'sessions#new', via: :get
 
 end

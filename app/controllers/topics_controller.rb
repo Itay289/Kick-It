@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-	before_filter :signed_in_user, only: [:new]
+	before_filter :signed_in_user, only: [:new, :create]
 
 	def show
 

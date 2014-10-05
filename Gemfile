@@ -32,8 +32,6 @@ gem 'spring',        group: :development
 # use mongoDB as database 
 gem 'mongo_mapper'
 
-gem 'rspec-rails', '2.11.0', group: :development
-
 # use faker to create fake
 gem 'faker', '1.4.3'
 
@@ -41,10 +39,13 @@ gem 'rmagick'
 
 gem 'carrierwave', '0.8.0'
 group :development, :test do
+  gem "rspec-rails", '~> 2.14.0.rc1'
 	gem 'spork-rails'
   gem 'guard-spork'
+  gem 'guard-rspec'
   gem 'terminal-notifier-guard'	
   gem 'minitest'
+  gem 'byebug', require: 'byebug'
 end
 
 # Use ActiveModel has_secure_password
