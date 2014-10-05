@@ -21,7 +21,7 @@
     <h4 class="media-heading"><a href=<%= topic_subtopic_path(params[:topic_id], sub_topic.id) %> ><%= sub_topic.title %></a></h4>
 		<%= sub_topic.desc %> <br>
     <span class="pull-right">
-    created <%= distance_of_time_in_words_to_now(sub_topic.created_at) %> by <%= sub_topic.created_by %>
+    created <%= distance_of_time_in_words_to_now(sub_topic.created_at) %> ago by <%= sub_topic.created_by %>
     </span>
   </div>
 </div>

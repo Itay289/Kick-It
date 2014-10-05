@@ -6,15 +6,11 @@ class SubtopicsController < ApplicationController
     @sub_topics = @topic.subtopics
     @sub_topic = nil
     @sub_topics.each do |sub_t|
-      puts "vvvvvvvvvvvv"
-      puts sub_t.title
-      if sub_t.id == params[:id]
+      if sub_t.id.to_s == params[:id]
         @sub_topic = sub_t
       end
     end
-    puts "hhhhhhh"
-    puts @sub_topic
-    # @comments = @sub_topic.comments
+    @comments =  @sub_topic.comments
 	end
 
 	def index
@@ -25,16 +21,21 @@ class SubtopicsController < ApplicationController
   def new
     @topic = Topic.find_by_title(params[:topic_id])
     @subtopic = Sub_topic.new()
+    @comment.new()
 	end
 
 	def create
-    args = params[:sub_topic]
-    args[:topic] = params[:topic_id]
+    puts "ggggggggggg"
+    puts params
+    @topic = Topic.find_by_title(params[:topic_id])
     # TODO : change created_by to the user -> params[:session][:mail]
-    args[:created_by] = "me"
-    @sub_topic = Sub_topic.new(args)
-		@sub_topic.save
-    puts @sub_topic.inspect()
+    sub_topic = Subtopic.new(
+      :created_by => "me",
+      :desc => params[:sub_topic][:desc],
+      :title => params[:sub_topic][:title],
+      )
+		@topic.subtopics << sub_topic
+    @topic.save
 		flash[:success] = "Subject created successfully"
 		redirect_to topic_subtopics_path
 	end
