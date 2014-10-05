@@ -69,7 +69,7 @@ def update_sub_topic
 	topics.each do |topic|
 		5.times do
 			sample_users = users.sample(rand(1..7))
-			topic.subtopics << Subtopic.new(
+			topic.sub_topics << SubTopic.new(
   			:title => Faker::Lorem.sentence,
   			:created_by => users.sample.mail,
   			:desc => Faker::Lorem.paragraph,
@@ -86,7 +86,7 @@ def update_comments
 	users = User.all
 
   topics.each do |topic|
-    sub_topics = topic.subtopics
+    sub_topics = topic.sub_topics
     sub_topics.each do |sub_topic|
       sample_users = users.sample(rand(1..7))
       sample_users.each do |user|

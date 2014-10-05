@@ -7,7 +7,7 @@
 </div>
 <br>
 <hr>	
-<div><%= link_to 'Write New Reddit', new_topic_subtopic_path %></div>
+<div><%= link_to 'Write New Reddit', new_topic_sub_topic_path %></div>
 
 <% @sub_topics.each do |sub_topic|%>
 <div class="well well-small">
@@ -18,7 +18,7 @@
     <a href=<%= sub_topic.id.to_s + '/dislike' %>><i class="icon-large media-object icon-download"></i></a>
   </span>
   <div class="media-body">
-    <h4 class="media-heading"><a href=<%= topic_subtopic_path(params[:topic_id], sub_topic.id) %> ><%= sub_topic.title %></a></h4>
+    <h4 class="media-heading"><a href=<%= topic_sub_topic_path(params[:topic_id], sub_topic.id) %> ><%= sub_topic.title %></a></h4>
 		<%= sub_topic.desc %> <br>
     <span class="pull-right">
     created <%= distance_of_time_in_words_to_now(sub_topic.created_at) %> ago by <%= sub_topic.created_by %>

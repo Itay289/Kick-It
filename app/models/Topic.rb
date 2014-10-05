@@ -1,8 +1,8 @@
 class Topic
 	include MongoMapper::Document
-  many :subtopics
+  many :sub_topics
 
-	key :title , String, :required
+	key :title , String
 	key :image , String
 	key :created_by , String
 

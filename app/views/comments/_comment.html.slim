@@ -4,7 +4,7 @@ div.comments
   
   h2.comment-headline Add a comment:
 
-  = form_for Comment.new ,url: topic_subtopic_comments_path(:subtopic_id => @sub_topic.id , :id => @sub_topic.id) , html: { method: :post } do |f| 
+  = form_for Comment.new ,url: topic_sub_topic_comments_path(:sub_topic_id => @sub_topic.id , :id => @sub_topic.id) , html: { method: :post } do |f| 
     div.text
       p = f.label :body 
         = f.text_area :body 

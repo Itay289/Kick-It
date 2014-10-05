@@ -3,7 +3,7 @@
 
 		<h2>Create New Reddit</h2>
 
-		<%= form_for ([@topic,@subtopic]) ,url: topic_subtopics_path(@topic.title) , html: { method: :post } do |f| %>
+		<%= form_for ([@topic,@subtopic]) ,url: topic_sub_topics_path(@topic.title) , html: { method: :post } do |f| %>
 		  <%= f.label :title %>
 		  <%= f.text_field :title %>
 		  <%= f.label :desc %>
