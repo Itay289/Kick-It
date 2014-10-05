@@ -1,0 +1,7 @@
+
+h1 = @sub_topic.title 
+
+.desc = @sub_topic.desc 
+span.pull-right	= "Created By: '#{@sub_topic.created_by}' "
+
+= render partial: 'comments/comment' 

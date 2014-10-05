@@ -1,0 +1,26 @@
+
+
+div.comments
+  
+  h2.comment-headline Add a comment:
+
+  = form_for Comment.new ,url: topic_subtopic_comments_path(:subtopic_id => @sub_topic.id , :id => @sub_topic.id) , html: { method: :post } do |f| 
+    div.text
+      p = f.label :body 
+        = f.text_area :body 
+      	= f.submit "Submit", class: "btn btn-large btn-primary" 
+    
+	
+  h2.comment-headline = @sub_topic.comments.count.to_s + ' Comments' 
+
+  - @sub_topic.comments.each do |comment|
+		div.well.well-small
+			div.media
+		  		div.small.media-body
+						= comment.body 
+			  			br.span.pull-right 
+			  				= "posted #{distance_of_time_in_words_to_now(comment.created_at).to_s}" + ' ago by ' "#{comment.name}"
+
+
+
+

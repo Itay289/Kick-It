@@ -37,6 +37,8 @@ gem 'faker', '1.4.3'
 
 gem 'rmagick'
 
+gem 'slim'
+
 gem 'carrierwave', '0.8.0'
 group :development, :test do
   gem "rspec-rails", '~> 2.14.0.rc1'
