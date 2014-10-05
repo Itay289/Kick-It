@@ -14,10 +14,16 @@ class TopicsController < ApplicationController
 	end
 
 	def create
-		puts "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
-		puts params[:topic]
-		@topics = Topic.new(params[:topic])
-		@topics.save
+		uploader = ImageUploader.new
+		uploader.store!(params[:topic][:image])
+
+		@topic = Topic.new(
+			:title => params[:title],
+			:image => uploader.url,
+			:created_by => "stam",
+			)
+		@topic.save
+
 		flash[:success] = "Subject created successfully"
 		redirect_to topics_path
 	end

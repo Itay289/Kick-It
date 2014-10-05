@@ -35,6 +35,9 @@ gem 'mongo_mapper'
 # use faker to create fake
 gem 'faker', '1.4.3'
 
+gem 'rmagick'
+gem 'carrierwave'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
