@@ -1,6 +1,8 @@
+
 <h1><%= @sub_topic.title %></h1>
-<div>
+<div class="desc">
   <%= @sub_topic.desc %> 
+  <p><small>Created By: <%= @sub_topic.created_by %></small></p>
 </div>
 <hr>
 <div><%= link_to 'Comment', '#' %></div>
@@ -17,3 +19,5 @@
 </div>
 </div>
 <%end%>
+<%= render partial: 'comments/comment' %>
+
