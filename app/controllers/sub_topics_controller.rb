@@ -1,16 +1,10 @@
 class SubTopicsController < ApplicationController
   helper_method :change_score
   before_filter :signed_in_user, only: [:new]
-
+  # fffff
 	def show
     @topic = Topic.find_by(title: params[:topic_id])
-    @sub_topics = @topic.sub_topics
-    @sub_topic = nil
-    @sub_topics.each do |sub_t|
-      if sub_t.id.to_s == params[:id]
-        @sub_topic = sub_t
-      end
-    end
+    @sub_topic = @topic.sub_topics.find_by(_id: params[:id])
     @comments =  @sub_topic.comments
 	end
 

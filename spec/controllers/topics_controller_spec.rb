@@ -4,7 +4,7 @@ describe TopicsController do
   render_views
 	describe "POST create" do
     before do
-      @success_attrs = { topic: { image: "1" } }
+      @success_attrs = { topic: {title: "test", image: "1" } }
       @failure_attrs = {}
     end
 
@@ -31,7 +31,12 @@ describe TopicsController do
       end
     end
 
-    it "should increase topics count"
+    it "should increase topics count" do
+      expect {
+        post :create, @success_attrs
+      }.to change{ Topic.count }.by(1)
+    end
+
     it "should create topic with current user mail"
 	end
 
