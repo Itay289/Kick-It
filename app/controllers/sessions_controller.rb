@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 		user = User.find_by(mail: params[:session][:mail])
 		if user  
 				sign_in user  
-       	redirect_to root_path 
+       	redirect_back_or root_path  
        	flash[:success] = "You are signed in as #{user.mail}"
 		else	
 				flash.now[:error] = "invalid email"
@@ -18,7 +18,11 @@ class SessionsController < ApplicationController
 
 	def destroy
 		sign_out
-		redirect_to root_path
+		redirect_to :back
+	end
+
+	def inde
+		
 	end
 
 end

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :signed_in_user, only: [:create]
 
 	def new 
     @topic = Topic.find_by(title: params[:topic_id])
@@ -13,7 +14,6 @@ class CommentsController < ApplicationController
   end  
 
   def create
-    puts cookies
     @topic = Topic.find_by(title: params[:topic_id])
     subtopics = @topic.sub_topics
     @subtopic = nil

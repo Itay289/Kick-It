@@ -7,5 +7,6 @@ class Comment
 
   embedded_in :sub_topic
 
+	validates :body, presence: true 
 
 end
