@@ -1,3 +1,5 @@
+require 'database_cleaner'
+
 namespace :dbtest do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -16,22 +18,13 @@ namespace :dbtest do
     puts "creating comments"
     update_comments
 
-    # puts "done"
+    puts "done"
   end
 end
 
 def clean_data
-	users = User.all
-	users.each { |user| user.destroy() }
-
-	topics = Topic.all
-	topics.each { |topic| topic.destroy() }
-
-	# sub_topics = SubTopic.all
-	# sub_topics.each { |sub| sub.destroy()}
-
-	# comments = Comment.all
-	# comments.each { |com| com.destroy()}
+  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.clean
 end
 
 def update_users
@@ -43,7 +36,6 @@ def update_users
 
 	names.each do |name|
 		user = User.create({
-			:name => name,
 			:mail => name + '@ftbpro.com',
 			})
 	end
@@ -57,7 +49,7 @@ def update_topic
 		topic = Topic.create({
 			:title => Faker::Lorem.word,
 			:image => 'imageplaceholder',
-			:created_by => user.name,
+			:created_by => user.mail,
 		})
 	end
 end
@@ -91,7 +83,6 @@ def update_comments
       sample_users = users.sample(rand(1..7))
       sample_users.each do |user|
         sub_t.comments << Comment.new(
-          :name => user.name,
           :mail => user.mail,
           :body => Faker::Lorem.sentence,
           )
@@ -100,5 +91,3 @@ def update_comments
     end
   end
  end
-         #  SubTopic.all(:conditions => {'comments.name' => 'shahaf'})
-

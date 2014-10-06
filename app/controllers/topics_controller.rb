@@ -16,10 +16,11 @@ class TopicsController < ApplicationController
 	def create
 		uploader = ImageUploader.new
 		uploader.store!(params[:topic][:image])
+		# byebug
 		@topic = Topic.new(
 			:title => params[:topic][:title],
 			:image => uploader.url,
-			:created_by => "stam",
+			:created_by => cookies[:mail],
 			)
 		@topic.save
 

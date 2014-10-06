@@ -19,7 +19,7 @@ div.comments
 		  		div.small.media-body
 						= comment.body 
 			  			br.span.pull-right 
-			  				= "posted #{distance_of_time_in_words_to_now(comment.created_at).to_s}" + ' ago by ' "#{comment.name}"
+			  				= "posted #{distance_of_time_in_words_to_now(comment.created_at).to_s}" + ' ago by ' "#{comment.mail.to_s.split('@').first}"
 
 
 

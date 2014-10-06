@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
       end
     end
     @comment = Comment.new
-    das
   end  
 
   def create
@@ -24,8 +23,7 @@ class CommentsController < ApplicationController
       end
     end
     comment = Comment.new(
-      :name => "shahaf name",
-      :mail => "shahaf mail",
+      :mail => cookies[:mail],
       :body => params[:comment][:body],
 
       )

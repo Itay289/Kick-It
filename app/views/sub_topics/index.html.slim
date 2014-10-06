@@ -32,8 +32,8 @@
 - provide(:title, 'Topicss') 
 div
   h1 = @topic.title 
-div.pull-left
-  = "created by  '#{@topic.created_by}'"
+div.pull-right
+  = "created by #{@topic.created_by.to_s.split('@').first}"
 br 
 .reddit
   = link_to "Write New Reddit", "#{new_topic_sub_topic_path.to_s}"

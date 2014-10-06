@@ -30,6 +30,8 @@ gem 'spring',        group: :development
 
 gem 'slim'
 
+gem 'database_cleaner'
+
 # use mongoDB as database 
 # gem 'mongo_mapper'
 
@@ -39,8 +41,6 @@ gem "mongoid", "~> 4.0.0"
 gem 'faker', '1.4.3'
 
 gem 'rmagick'
-
-gem 'slim'
 
 gem 'carrierwave', '0.8.0'
 group :development, :test do
