@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		user = User.where(mail: params[:session][:mail])
+		user = User.find_by(mail: params[:session][:mail])
 		if user  
 				sign_in user  
        	redirect_to root_path 
