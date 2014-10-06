@@ -1,0 +1,15 @@
+div.row
+	div.span6.offset3
+
+		h2 Create New Reddit
+
+		= form_for ([@topic,@subtopic]) ,url: topic_sub_topics_path(@topic.title) , html: { method: :post } do |f| 
+			  = f.label :title 
+			  br
+				= f.text_field :title
+				= f.label :description 
+				br
+				= f.text_area :desc 
+
+				= f.submit "Create New Reddit", class: "btn btn-large btn-primary" 
+				

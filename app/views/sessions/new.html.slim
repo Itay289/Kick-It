@@ -1,0 +1,14 @@
+- provide(:title, 'Sign in') 
+h1 Sign in
+
+div.row
+	div.span6.offset3
+
+		= form_for(:session, url: sessions_path) do |f| 
+
+			= f.label :mail 
+			= f.text_field :mail 
+
+			= f.submit "Sign in", class: "btn btn-large btn-primary" 
+
+		

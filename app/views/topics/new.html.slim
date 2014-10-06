@@ -1,0 +1,16 @@
+
+div.row
+	div.span6.offset3
+
+		h2 Create New Topic
+
+		= form_for @topics do |f| 
+
+		  = f.label :title 
+		  = f.text_field :title 
+		  br
+			= f.submit "Create New Topic", class: "btn btn-large btn-primary" 
+			p
+				= f.file_field :image 
+			
+		
