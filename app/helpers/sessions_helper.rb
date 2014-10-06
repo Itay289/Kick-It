@@ -27,7 +27,14 @@ module SessionsHelper
 	end
 
 	def store_location
-		session[:return_to] = request.fullpath
+		a = request.fullpath
+		a.sub!(/comments/, '')
+		session[:return_to] = a
+	end
+
+	def redirect_back_or(default)
+		redirect_to(session[:return_to] || default)
+		session.delete(:return_to)
 	end
 
   def signed_in_user
