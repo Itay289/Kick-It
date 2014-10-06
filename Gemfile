@@ -44,6 +44,7 @@ gem 'rmagick'
 
 gem 'carrierwave', '0.8.0'
 group :development, :test do
+  gem 'capybara'
   gem "rspec-rails", '~> 2.14.0.rc1'
 	gem 'spork-rails'
   gem 'guard-spork'

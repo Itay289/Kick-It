@@ -48,8 +48,8 @@ def update_topic
     user = users.sample
 		topic = Topic.create({
 			:title => Faker::Lorem.word,
-			:image => 'imageplaceholder',
 			:created_by => user.mail,
+      :image => "/uploads/default" + rand(1..6).to_s + ".png"
 		})
 	end
 end

@@ -58,7 +58,7 @@ development:
 test:
   sessions:
     default:
-      database: reddit_test
+      database: reddit_test1
       hosts:
         - localhost:27017
       options:

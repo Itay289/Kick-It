@@ -32,15 +32,14 @@ describe TopicsController do
     end
 
     it "should increase topics count" do
-      before_count = Topic.count
-      post :create , success_attrs
-      after_count = Topic.count
-      except(after_count).to qe(before_count + 1)
+      expect { 
+        post :create , @success_attrs
+        }.to change(Topic, :count).by(1)
     end
 
     it "should create topic with current user mail" do
       post :create, @success_attrs
-      excpect (Topic.first.created_by).to eq(cookies[:mail])
+      excpect (Topic.last.created_by).to eq(cookies[:mail])
     end
 	end
 
@@ -57,3 +56,5 @@ describe TopicsController do
   end
 
 end
+
+  
