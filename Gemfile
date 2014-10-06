@@ -31,7 +31,9 @@ gem 'spring',        group: :development
 gem 'slim'
 
 # use mongoDB as database 
-gem 'mongo_mapper'
+# gem 'mongo_mapper'
+
+gem "mongoid", "~> 4.0.0"
 
 # use faker to create fake
 gem 'faker', '1.4.3'

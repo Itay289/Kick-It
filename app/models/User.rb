@@ -1,6 +1,6 @@
 class User
-	include MongoMapper::Document
+	include Mongoid::Document
 	
-	key :name , String
-	key :mail , String
+	field :name , type: String
+	field :mail , type: String
 end

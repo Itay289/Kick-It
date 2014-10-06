@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
 	def new 
-    @topic = Topic.find_by_title(params[:topic_id])
+    @topic = Topic.find_by(title: params[:topic_id])
     @subtopics = @topic.sub_topics
     @subtopic = nil
     @subtopics.each do |sub_t|
@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
   def create
     puts cookies
-    @topic = Topic.find_by_title(params[:topic_id])
+    @topic = Topic.find_by(title: params[:topic_id])
     subtopics = @topic.sub_topics
     @subtopic = nil
     subtopics.each do |sub_t|

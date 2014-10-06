@@ -3,7 +3,7 @@ class SubTopicsController < ApplicationController
   before_filter :signed_in_user, only: [:new]
 
 	def show
-    @topic = Topic.find_by_title(params[:topic_id])
+    @topic = Topic.find_by(title: params[:topic_id])
     @sub_topics = @topic.sub_topics
     @sub_topic = nil
     @sub_topics.each do |sub_t|
@@ -15,18 +15,18 @@ class SubTopicsController < ApplicationController
 	end
 
 	def index
-      @topic = Topic.find_by_title(params[:topic_id])
+      @topic = Topic.find_by(title: params[:topic_id])
       @sub_topics = @topic.sub_topics
 	end
 
   def new
-    @topic = Topic.find_by_title(params[:topic_id])
+    @topic = Topic.find_by(title: params[:topic_id])
     @subtopic = SubTopic.new
     Comment.new
 	end
 
 	def create
-    @topic = Topic.find_by_title(params[:topic_id])
+    @topic = Topic.find_by(title: params[:topic_id])
     # TODO : change created_by to the user -> params[:session][:mail]
     sub_topic = SubTopic.new(
       :created_by => "me",

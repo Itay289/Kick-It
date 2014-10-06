@@ -1,10 +1,12 @@
 class Comment
-	include MongoMapper::EmbeddedDocument
-	# belongs_to :user
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
-	key :name , String
-	key :mail , String
-  key :body , String
+  field :name , type: String
+	field :mail , type: String
+  field :body , type: String
 
-	timestamps!
+  embedded_in :sub_topic
+
+
 end
