@@ -1,0 +1,14 @@
+- provide(:title, "Kick-It")
+div
+  h1 Welcome
+
+div
+  = link_to 'Create new Topic' , new_topic_path
+
+div.topic-read
+  ul.thumbnails
+   - @topics.each do |topic|
+    li.span4 
+      = topic.title 
+      = link_to image_tag(topic.image) , topic_sub_topics_path(topic_id: topic.title) , class: "thumbnail"
+        
