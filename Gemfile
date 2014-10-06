@@ -52,6 +52,7 @@ group :development, :test do
   gem 'terminal-notifier-guard'	
   gem 'minitest'
   gem 'byebug', require: 'byebug'
+  gem 'capybara'
 end
 
 # Use ActiveModel has_secure_password

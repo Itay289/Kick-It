@@ -16,10 +16,17 @@ div.comments
   - @sub_topic.comments.each do |comment|
 		div.well.well-small
 			div.media
+<<<<<<< HEAD
 		  	div.small.media-body
 					= comment.body 
 			  		br.span.pull-right 
 			 			= "posted #{distance_of_time_in_words_to_now(comment.created_at).to_s}" + ' ago by ' "#{comment.mail.to_s.split('@').first}"
+=======
+	  		div.small.media-body
+					= comment.body 
+		  			br.pull-right 
+		  				= "posted #{distance_of_time_in_words_to_now(comment.created_at).to_s}" + ' ago by ' "#{comment.mail}"
+>>>>>>> 8f8cfb20a9e806e0f292941ba9ed22b5167b4666
 
 
 
