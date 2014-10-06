@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe TopicsController do
   render_views
-	describe "POST create" do
+  describe "POST create" do
     before do
       @success_attrs = { topic: {title: "test", image: "1" } }
       @failure_attrs = {}
@@ -29,19 +29,22 @@ describe TopicsController do
           }.to raise_error
         end
       end
-    end
+    
 
-    it "should increase topics count" do
-      expect { 
-        post :create , @success_attrs
-        }.to change(Topic, :count).by(1)
-    end
+      context "with valid information" do
 
-    it "should create topic with current user mail" do
-      post :create, @success_attrs
-      excpect (Topic.last.created_by).to eq(cookies[:mail])
+        it "should create a Topic" do
+          expect { post :create, @success_attrs }.to change(Topic, :count).by(1)
+        end
+      end
+
+
+        it "should create topic with current user mail" do
+          post :create, @success_attrs
+          Topic.last.created_by.should eq(cookies[:mail])
+        end
+      end
     end
-	end
 
   describe "GET index" do
     it "should not require authentication" do
@@ -56,5 +59,3 @@ describe TopicsController do
   end
 
 end
-
-  
