@@ -29,20 +29,22 @@ describe TopicsController do
           }.to raise_error
         end
       end
-    end
+    
 
-    it "should increase topics count" do
-      before_count = Topic.count
-      post :create , success_attrs
-      after_count = Topic.count
-      except(after_count).to qe(before_count + 1)
-    end
+      context "with valid information" do
 
-    it "should create topic with current user mail" do
-      post :create, @success_attrs
-      excpect (Topic.first.created_by).to eq(cookies[:mail])
+        it "should create a Topic" do
+          expect { post :create, @success_attrs }.to change(Topic, :count).by(1)
+        end
+      end
+
+
+        it "should create topic with current user mail" do
+          post :create, @success_attrs
+          Topic.last.created_by.should eq(cookies[:mail])
+        end
+    	end
     end
-	end
 
   describe "GET index" do
     it "should not require authentication" do
