@@ -27,9 +27,7 @@ module SessionsHelper
 	end
 
 	def store_location
-		a = request.fullpath
-		a.sub!(/comments/, '')
-		session[:return_to] = a
+		session[:return_to] = request.fullpath.gsub( /\/comments\?.*/, "" )
 	end
 
 	def redirect_back_or(default)

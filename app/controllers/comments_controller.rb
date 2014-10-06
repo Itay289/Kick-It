@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
   end  
 
   def create
-    puts cookies
     @topic = Topic.find_by(title: params[:topic_id])
     subtopics = @topic.sub_topics
     @subtopic = nil
