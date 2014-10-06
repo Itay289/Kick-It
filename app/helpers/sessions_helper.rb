@@ -14,7 +14,7 @@ module SessionsHelper
 	end
 
 	def current_user
-		@current_user ||= User.find_by_mail(cookies[:mail]) if cookies[:mail]
+		@current_user ||= User.find_by(mail: cookies[:mail]) if cookies[:mail]
 	end
 
 	def current_user?(user)

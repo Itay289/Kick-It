@@ -87,10 +87,10 @@ def update_comments
 
   topics.each do |topic|
     sub_topics = topic.sub_topics
-    sub_topics.each do |sub_topic|
+    sub_topics.each do |sub_t|
       sample_users = users.sample(rand(1..7))
       sample_users.each do |user|
-        sub_topic.comments << Comment.new(
+        sub_t.comments << Comment.new(
           :name => user.name,
           :mail => user.mail,
           :body => Faker::Lorem.sentence,

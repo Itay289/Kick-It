@@ -1,10 +1,11 @@
 class Topic
-	include MongoMapper::Document
-  many :sub_topics
+	include Mongoid::Document
+  include Mongoid::Timestamps
 
-	key :title , String
-	key :image , String
-	key :created_by , String
+  field :title , type: String
+	field :image , type: String
+	field :created_by , type: String
 
-	timestamps!
+  embeds_many :sub_topics
+
 end

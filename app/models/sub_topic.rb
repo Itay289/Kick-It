@@ -1,12 +1,14 @@
 class SubTopic
-	include MongoMapper::EmbeddedDocument
-  many :comments
+	include Mongoid::Document
+  include Mongoid::Timestamps
 
-	key :title , String
-	key :created_by , String 
-	key :desc , String
-	key :users , Array , :default => []
-	key :score , Integer , :default => 0
+  field :title , type: String 
+	field :created_by , type: String 
+	field :desc , type: String
+	field :users , type: Array , default:  []
+	field :score , type: Integer , default: 0
+  
+  embedded_in :topic
+  embeds_many :comments
 
-	timestamps!
 end
