@@ -1,6 +1,6 @@
 class SubTopicsController < ApplicationController
   helper_method :change_score
-  before_filter :signed_in_user, only: [:new]
+  before_filter :signed_in_user, only: [:new, :create, :change_score]
   # fffff
 	def show
     @topic = Topic.find_by(title: params[:topic_id])
@@ -23,7 +23,7 @@ class SubTopicsController < ApplicationController
     @topic = Topic.find_by(title: params[:topic_id])
     # TODO : change created_by to the user -> params[:session][:mail]
     sub_topic = SubTopic.new(
-      :created_by => "me",
+      :created_by => cookies[:mail],
       :desc => params[:sub_topic][:desc],
       :title => params[:sub_topic][:title],
       )
@@ -38,8 +38,9 @@ class SubTopicsController < ApplicationController
 		flash[:success] = "Subject destroyed."
 	end
 
-  def change_score(item_id , interval)
-
+  def change_score(sub_topic_id , interval)
+    @topic = Topic.find_by(title: params[:topic_id])
+    @sub_topic = @topic.sub_topics.find_by(_id: :sub_topic_id) 
   end
 
 end
