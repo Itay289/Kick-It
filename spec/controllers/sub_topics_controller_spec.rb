@@ -22,7 +22,6 @@ describe SubTopicsController do
 
           context "right attributes" do
             it "should redirect to topics_sub_topics_path" do
-              byebug
               post :create, @success_attrs
               response.should redirect_to topic_sub_topics_path
             end
@@ -37,30 +36,37 @@ describe SubTopicsController do
           end
         
 
-          context "with valid information" do
+          # context "with valid information" do
 
-            it "should create a Topic" do
-              @topic = Topic.find_by(title: "test")
-              expect { post :create, @success_attrs }.to change(@topic.sub_topics, :count).by(1)
-            end
-          end
+          # #   it "should create a Topic" do
+          # #     @topic = Topic.find_by(title: "test")
+          # #     expect { post :create, @success_attrs }.to change(@topic.sub_topics, :count).by(1)
+          # #   end
+          # # end
 
           it "should create topic with current user mail" do
             post :create, @success_attrs
-            Topic.last.created_by.should eq(cookies[:mail])
+            Topic.last.sub_topics.last.created_by.should eq(cookies[:mail])
           end
+
+        context "voting" do
+          it "should change the score" do
+            @topic = Topic.last
+            post :create, @success_attrs
+            byebug
+            @sub_topic = @topic.sub_topics.last 
+            a = {sub_topic_id: @sun_topic_id, count_action: :like}
+            expect { get :change_score, a  }.to change(@sub_topic.score).by(1)
+          end  
         end
+      end
 
     describe "GET index" do
       it "should not require authentication" do
         cookies[:mail] = nil
-        get :index 
+        get :index, @success_attrs
         expect(response).to render_template(:index)
       end
-
-      #t1 = Topic.create title: "shahaf"
-      #t2 = Topic.create title: "itay"
-      #rendered.should_contain "shahaf"
     end
-  end
+  end 
 end

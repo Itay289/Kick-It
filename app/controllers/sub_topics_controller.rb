@@ -38,9 +38,15 @@ class SubTopicsController < ApplicationController
 		flash[:success] = "Subject destroyed."
 	end
 
-  def change_score(sub_topic_id , interval)
+  def change_score
     @topic = Topic.find_by(title: params[:topic_id])
-    @sub_topic = @topic.sub_topics.find_by(_id: :sub_topic_id) 
+    @sub_topic = @topic.sub_topics.find_by(params[:sub_topic_id]) 
+    if params[:count_action] == :like
+      @sub_topic.inc(score: 1)
+    elsif params[:count_action] == :dislike
+      @sub_topic.inc(score: -1)
+    end
+      
   end
 
 end
