@@ -73,8 +73,6 @@ describe SubTopicsController do
         end
 
         it "should require authentcation" do
-
-
         end
 
         it "should increase topics score by 1" do
@@ -84,6 +82,50 @@ describe SubTopicsController do
         it "should redirect to topic sub topics path" do
           put :upvote, id: @sub_topic.id, topic_id: @topic.title
           response.should redirect_to topic_sub_topics_path
+        end
+
+        describe "should set voting values to the current user" do
+          before {put :upvote, id: @sub_topic.id, topic_id: @topic.title}
+          subject {Topic.last.sub_topics.last.votes.last}
+          its(:mail) {should eq @user.mail}
+          its(:voting) {should eq 1}
+        end
+
+        context "user already voted" do
+          before {put :upvote, id: @sub_topic.id, topic_id: @topic.title}
+
+          it "should not add user to votes" do 
+            expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change{Topic.last.sub_topics.last.votes.count}.by(0) 
+          end
+
+          context "user voted before" do 
+            context "user vote is 1" do 
+              before {topic = Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).set(voting: 1)}
+            
+              it "should change user vote to 0" do 
+                put :upvote, id: @sub_topic.id, topic_id: @topic.title
+                Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).voting.should eq 0
+              end
+              it "should decriminate the score" do
+                expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change{Topic.last.sub_topics.last.score}.by(-1) 
+              end
+            end
+
+            context "user vote is 0" do 
+              before {topic = Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).set(voting: 0)}
+
+              it "should change user vote to 1" do 
+                put :upvote, id: @sub_topic.id, topic_id: @topic.title
+                Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).voting.should eq 1
+              end
+              it "should incriminate the score" do
+                expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change{Topic.last.sub_topics.last.score}.by(1) 
+              end
+            end
+            
+
+          end
+          
         end
 
       end

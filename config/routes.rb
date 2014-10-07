@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :topics do
   	resources :sub_topics do
       member do
-        get :change_score
         put :upvote
       end
 
