@@ -4,13 +4,24 @@ Rails.application.routes.draw do
 
   resources :topics do
   	resources :sub_topics do
+      member do
+        get :change_score
+      end
+
+      # collection do
+      #   get :search
+      # end
+
     	resources :comments
     end
   end
 
   resources :comments
   
-  resources :sessions
+  resources :sessions do
+
+  end
+
   
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/signin', to: 'sessions#new', via: :get

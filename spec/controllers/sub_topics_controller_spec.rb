@@ -36,27 +36,23 @@ describe SubTopicsController do
           end
         
 
-          # context "with valid information" do
+          context "with valid information" do
 
-          # #   it "should create a Topic" do
-          # #     @topic = Topic.find_by(title: "test")
-          # #     expect { post :create, @success_attrs }.to change(@topic.sub_topics, :count).by(1)
-          # #   end
-          # # end
+            it "should create a Topic" do
+              expect { post :create, @success_attrs }.to change{Topic.find_by(title: "test").sub_topics.count}.by(1)
+            end
+          end
 
           it "should create topic with current user mail" do
             post :create, @success_attrs
             Topic.last.sub_topics.last.created_by.should eq(cookies[:mail])
           end
 
-        context "voting" do
+        describe "voting" do
           it "should change the score" do
-            @topic = Topic.last
             post :create, @success_attrs
-            byebug
-            @sub_topic = @topic.sub_topics.last 
-            a = {sub_topic_id: @sun_topic_id, count_action: :like}
-            expect { get :change_score, a  }.to change(@sub_topic.score).by(1)
+            a = {id: Topic.last.sub_topics.last.id, count_action: :like, topic_id: Topic.last.title}
+            expect { get :change_score, a  }.to change{Topic.last.sub_topics.last.score}.by(1)
           end  
         end
       end
