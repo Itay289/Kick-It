@@ -3,6 +3,7 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch('config/application.rb')
   watch('config/environment.rb')
   watch('config/environments/test.rb')
+  watch('config/routes.rb')
   watch(%r{^config/initializers/.+\.rb$})
   watch('Gemfile.lock')
   watch('spec/spec_helper.rb') { :rspec }
@@ -10,7 +11,7 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch(%r{features/support/}) { :cucumber }
 end
 
-guard 'rspec', cli: "bundle exec rspec --color --drb --format nested"  do
+guard 'rspec', cmd: "bundle exec rspec --color --drb --format nested"  do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

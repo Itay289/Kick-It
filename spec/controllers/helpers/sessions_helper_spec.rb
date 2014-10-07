@@ -12,9 +12,7 @@ describe SessionsHelper, type: :controller do
 
   context "User signed in" do
     before do
-      @mail = "shahaf@ftbpro.com"
-      cookies[:mail] = @mail
-      User.create mail: @mail
+      sign_in_user
     end
 
     it "should return 200" do
@@ -25,7 +23,7 @@ describe SessionsHelper, type: :controller do
   end
   context "User not signed in" do
     before do
-      cookies[:mail] = nil
+      sign_out_user
     end
 
     context "right attributes" do

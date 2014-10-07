@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
 		@topic.save
 
 		flash[:success] = "Subject created successfully"
-		redirect_to topics_path
+    redirect_to topics_path
 	end
 	
 end

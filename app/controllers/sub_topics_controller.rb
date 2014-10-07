@@ -1,7 +1,6 @@
 class SubTopicsController < ApplicationController
   helper_method :change_score
-  before_filter :signed_in_user, only: [:new, :create, :change_score]
-  # fffff
+  before_filter :signed_in_user, only: [:new, :create, :upvote, :destroy]
 	def show
     @topic = Topic.find_by(title: params[:topic_id])
     @sub_topic = @topic.sub_topics.find_by(_id: params[:id])
@@ -50,6 +49,15 @@ class SubTopicsController < ApplicationController
     end
     redirect_to topic_sub_topics_path
       
+  end
+
+  def upvote
+    topic = Topic.find_by(title: params[:topic_id])
+    sub_topic = topic.sub_topics.find_by(id: params[:id])
+    sub_topic.inc(score: 1)
+    topic.save!
+
+    redirect_to topic_sub_topics_path
   end
 
 

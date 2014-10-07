@@ -3,23 +3,42 @@ require 'spec_helper'
 describe TopicsController do
   render_views
   describe "POST create" do
-    before do
+    it_behaves_like "authenticated route", [ { verb: :post, action: :create, params: {} } ]
+    before :each do
       @success_attrs = { topic: {title: "test", image: "1" } }
       @failure_attrs = {}
     end
 
     context "User signed in" do
       before do
-        @mail = "shahaf@ftbpro.com"
-        cookies[:mail] = @mail
-        User.create mail: @mail
+        @user = sign_in_user
       end
 
-      context "right attributes" do
-        it "should redirect to topics_path" do
-          post :create, @success_attrs
-          response.should redirect_to topics_path
+      context "valid attributes" do
+        describe "response" do
+          before {post :create, @success_attrs}
+          subject {response}
+          it {should redirect_to topics_path}
         end
+
+        #Alternative way
+        #it "should redirect to topics_path" do
+          #post :create, @success_attrs
+          #response.should redirect_to topics_path
+          #Topic.last.created_by.should
+        #end
+
+        it "should create a Topic" do
+          expect { post :create, @success_attrs }.to change(Topic, :count).by(1)
+        end
+
+        describe "created topic attributes" do
+          before {post :create, @success_attrs}
+          subject {Topic.last}
+          its(:created_by) {should eq @user.mail}
+          its(:title) {should eq @success_attrs[:topic][:title]}
+        end
+
       end
 
       context "wrong attributes" do
@@ -29,26 +48,13 @@ describe TopicsController do
           }.to raise_error
         end
       end
-    
 
-      context "with valid information" do
-
-        it "should create a Topic" do
-          expect { post :create, @success_attrs }.to change(Topic, :count).by(1)
-        end
-      end
-
-
-        it "should create topic with current user mail" do
-          post :create, @success_attrs
-          Topic.last.created_by.should eq(cookies[:mail])
-        end
-      end
     end
+  end
 
   describe "GET index" do
     it "should not require authentication" do
-      cookies[:mail] = nil
+      sign_out_user
       get :index 
       expect(response).to render_template(:index)
     end
