@@ -40,13 +40,21 @@ class SubTopicsController < ApplicationController
 
   def change_score
     @topic = Topic.find_by(title: params[:topic_id])
-    @sub_topic = @topic.sub_topics.find_by(params[:sub_topic_id]) 
-    if params[:count_action] == :like
+    @sub_topic = @topic.sub_topics.find_by(id: params[:id])
+    if params[:count_action] == "like"
       @sub_topic.inc(score: 1)
-    elsif params[:count_action] == :dislike
+      @topic.save
+    elsif params[:count_action] == "dislike"
       @sub_topic.inc(score: -1)
+      @topic.save
     end
+    redirect_to topic_sub_topics_path
       
   end
+
+
+  protected
+
+
 
 end
