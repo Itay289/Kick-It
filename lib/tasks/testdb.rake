@@ -64,8 +64,7 @@ def update_sub_topic
 			topic.sub_topics << SubTopic.new(
   			:title => Faker::Lorem.sentence,
   			:created_by => users.sample.mail,
-  			:desc => Faker::Lorem.paragraph,
-  			:users => [{ :mail => 'shahaf255@.com' , :vote => 1}],
+  			:descr => Faker::Lorem.paragraph,
   			:score => rand(-7..7),
 			  )
       topic.save

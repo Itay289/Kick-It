@@ -2,7 +2,7 @@
 div
   h1 = @topic.title 
 div.pull-right
-  = "created by #{@topic.created_by.to_s.split('@').first}"
+  = "created by #{show_name(@topic)}"
 br 
 .reddit
   = link_to "Write New Reddit", "#{new_topic_sub_topic_path.to_s}"
@@ -18,9 +18,9 @@ br
           h4.media-heading 
             = link_to "#{sub_topic.title}", "#{topic_sub_topic_path(params[:topic_id], sub_topic.id)}"
             br
-          = sub_topic.desc 
+          = sub_topic.descr 
           span.pull-right
             br
-              = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{sub_topic.created_by}"
+              = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{sub_topic.created_by.to_s.split('@').first}"
 
      

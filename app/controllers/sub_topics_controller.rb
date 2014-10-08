@@ -9,7 +9,7 @@ class SubTopicsController < ApplicationController
 
 	def index
       @topic = Topic.find_by(title: params[:topic_id])
-      @sub_topics = @topic.sub_topics
+      @sub_topics = @topic.sub_topics.desc(:score)
 	end
 
   def new
@@ -23,7 +23,7 @@ class SubTopicsController < ApplicationController
     # TODO : change created_by to the user -> params[:session][:mail]
     sub_topic = SubTopic.new(
       :created_by => cookies[:mail],
-      :desc => params[:sub_topic][:desc],
+      :descr => params[:sub_topic][:desc],
       :title => params[:sub_topic][:title],
       )
 		@topic.sub_topics << sub_topic

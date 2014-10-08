@@ -4,7 +4,7 @@ class SubTopic
 
   field :title , type: String 
 	field :created_by , type: String 
-	field :desc , type: String
+	field :descr , type: String
 	field :score , type: Integer , default: 0
   
   embedded_in :topic

@@ -28,7 +28,7 @@ describe SubTopicsController do
       DatabaseCleaner.clean
       @topic_attrs = {title: "test", image: "1" } 
       @topic = Topic.create @topic_attrs
-      @success_attrs = {topic_id: @topic_attrs[:title], sub_topic: {title: "test title", desc: "test desc" } }
+      @success_attrs = {topic_id: @topic_attrs[:title], sub_topic: {title: "test title", descr: "test descr" } }
       @failure_attrs = {}
     end
 
@@ -62,7 +62,7 @@ describe SubTopicsController do
 
       it "should create topic with current user mail" do
         post :create, @success_attrs
-        Topic.last.sub_topics.last.created_by.should eq(cookies[:mail])
+        Topic.last.sub_topics.last.created_by.should eq(@user.mail)
       end
 
       describe "PUT upvote" do
