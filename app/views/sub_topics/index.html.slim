@@ -2,7 +2,7 @@
 div
   h1 = @topic.title 
 div.pull-right
-  = "created by #{@topic.created_by.to_s.split('@').first}"
+  = "created by #{show_name(@topic)}"
 br 
 .reddit
   = link_to "Create New Item", "#{new_topic_sub_topic_path.to_s}", class: "btn btn-primary"
@@ -11,18 +11,17 @@ br
     div.well.well-small
       div.media
         span.pull-left
-          = link_to "#{sub_topic.id.to_s}" + '/like' 
+          = link_to upvote_topic_sub_topic_path(id: sub_topic.id) , method: :put
             i.icon-large.media-object.icon-upload
           = sub_topic.score 
-          = link_to "#{sub_topic.id.to_s}" + '/dislike' 
-            i.icon-large.media-object.icon-download
         div.media-body
           h4.media-heading 
             = link_to "#{sub_topic.title}", "#{topic_sub_topic_path(params[:topic_id], sub_topic.id)}"
-            br
-          = sub_topic.desc 
+          br
+            = sub_topic.descr 
           span.pull-right
             br
-              = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{sub_topic.created_by}"
-              
+              = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{sub_topic.created_by.to_s.split('@').first}"
+
+
      
