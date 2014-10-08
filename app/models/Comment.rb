@@ -4,6 +4,7 @@ class Comment
 
 	field :mail , type: String
   field :body , type: String
+  field :active , type: Boolean , default: true
 
   embedded_in :sub_topic
 

@@ -6,6 +6,7 @@ class SubTopic
 	field :created_by , type: String 
 	field :descr , type: String
 	field :score , type: Integer , default: 0
+  field :active , type: Boolean , default: true
   
   embedded_in :topic
   embeds_many :comments

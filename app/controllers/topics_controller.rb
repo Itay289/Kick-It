@@ -6,7 +6,10 @@ class TopicsController < ApplicationController
 	end
 
 	def index
-		@topics = Topic.all		
+		@topics = Topic.where(active: true).all
+		if @topics == nil
+			@topics = []
+		end		
 	end
 
 	def new

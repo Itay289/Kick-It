@@ -56,6 +56,8 @@ development:
     # Ensure all times are UTC in the app side. (default: false)
     # use_utc: false
 test:
+  options:
+    raise_not_found_error: false
   sessions:
     default:
       database: reddit_test1

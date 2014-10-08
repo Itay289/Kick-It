@@ -54,7 +54,6 @@ describe SubTopicsController do
 
 
       context "with valid information" do
-
         it "should create a Topic" do
           expect { post :create, @success_attrs }.to change{Topic.find_by(title: "test").sub_topics.count}.by(1)
         end
@@ -137,6 +136,22 @@ describe SubTopicsController do
         get :index, @success_attrs
         expect(response).to render_template(:index)
       end
+
+      context "topic not found params" do
+        describe "wrong topic params" do
+          it "should redirect to home" do
+            get :index , {topic_id: "1", sub_topic: {title: "test title", descr: "test descr" } }
+            response.should redirect_to root_path 
+          end
+        end
+        describe "wrong sub topic params" do
+          it "should redirect to home" do
+            get :show , {topic_id: @topic_attrs[:title], id: "3" }
+            response.should redirect_to root_path 
+          end
+        end
+      end
     end
+
   end 
 end

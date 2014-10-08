@@ -2,14 +2,22 @@ class SubTopicsController < ApplicationController
   helper_method :change_score
   before_filter :signed_in_user, only: [:new, :create, :upvote, :destroy]
 	def show
-    @topic = Topic.find_by(title: params[:topic_id])
-    @sub_topic = @topic.sub_topics.find_by(_id: params[:id])
-    @comments =  @sub_topic.comments
+    begin 
+      @topic = Topic.where(active: true).find_by(title: params[:topic_id])
+      @sub_topic = @topic.sub_topics.where(active: true).find_by(_id: params[:id])
+      @comments =  @sub_topic.where(active: true).comments
+    rescue
+      redirect_to root_path
+    end
 	end
 
 	def index
-      @topic = Topic.find_by(title: params[:topic_id])
-      @sub_topics = @topic.sub_topics.desc(:score)
+    begin
+      @topic = Topic.where(active: true).find_by(title: params[:topic_id])
+      @sub_topics = @topic.sub_topics.where(active: true).desc(:score)
+    rescue
+      redirect_to root_path
+    end
 	end
 
   def new
@@ -36,20 +44,6 @@ class SubTopicsController < ApplicationController
 		@sub_topics = SubTopic.find(params[:id]).destroy
 		flash[:success] = "Subject destroyed."
 	end
-
-  def change_score
-    @topic = Topic.find_by(title: params[:topic_id])
-    @sub_topic = @topic.sub_topics.find_by(id: params[:id])
-    if params[:count_action] == "like"
-      @sub_topic.inc(score: 1)
-      @topic.save
-    elsif params[:count_action] == "dislike"
-      @sub_topic.inc(score: -1)
-      @topic.save
-    end
-    redirect_to topic_sub_topics_path
-      
-  end
 
   def upvote
     topic = Topic.find_by(title: params[:topic_id])
