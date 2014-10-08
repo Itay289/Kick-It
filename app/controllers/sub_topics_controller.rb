@@ -33,8 +33,14 @@ class SubTopicsController < ApplicationController
 	end
 
 	def destroy
-		@sub_topics = SubTopic.find(params[:id]).destroy
-		flash[:success] = "Subject destroyed."
+    if current_user.mail == Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).created_by
+      Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).destroy
+		  flash[:success] = "Subject destroyed." 
+      redirect_to topic_sub_topics_path
+    else
+      flash[:error] = "You cant destroy this item."
+      redirect_to :back       
+    end  
 	end
 
   def change_score
@@ -47,8 +53,22 @@ class SubTopicsController < ApplicationController
       @sub_topic.inc(score: -1)
       @topic.save
     end
-    redirect_to topic_sub_topics_path
-      
+    redirect_to topic_sub_topics_path   
+  end
+
+  def edit
+    @sub_topic = Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id])
+    if current_user.mail != @sub_topic.created_by
+      flash[:notice] ="Sorry, you can't edit this Kick"
+      redirect_to :back
+    end  
+  end
+
+  def update
+    @sub_topic = Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id])
+    if @sub_topic.update_attributes(:title, :image)
+      flash[:notice] = "Your Kick #{@topic.title} has been updated" 
+    end  
   end
 
   def upvote

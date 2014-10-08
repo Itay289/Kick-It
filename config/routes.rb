@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: 'topics#index'
 
   resources :topics do
+    member do
+      put :edit
+    end  
   	resources :sub_topics do
       member do
         get :change_score

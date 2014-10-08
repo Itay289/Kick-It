@@ -24,6 +24,7 @@ module SessionsHelper
 	def sign_out
 		self.current_user = nil
 		cookies.delete(:mail)
+		flash[:success] = "see ya"
 	end
 
 	def store_location
