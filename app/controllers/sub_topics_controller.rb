@@ -57,7 +57,8 @@ class SubTopicsController < ApplicationController
   end
 
   def edit
-    @sub_topic = Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id])
+    @topic = Topic.find_by(title: params[:topic_id])
+    @sub_topic = @topic.sub_topics.find_by(id: params[:id])
     if current_user.mail != @sub_topic.created_by
       flash[:notice] ="Sorry, you can't edit this Kick"
       redirect_to :back
@@ -66,8 +67,9 @@ class SubTopicsController < ApplicationController
 
   def update
     @sub_topic = Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id])
-    if @sub_topic.update_attributes(:title, :image)
-      flash[:notice] = "Your Kick #{@topic.title} has been updated" 
+    if @sub_topic.update(secure_params)
+      flash[:notice] = "Your Item #{@sub_topic.title} has been updated" 
+      redirect_to topic_sub_topic_path
     end  
   end
 
@@ -95,8 +97,10 @@ class SubTopicsController < ApplicationController
   end
 
 
-  protected
-
-
+  private
+    
+    def secure_params
+      params.require(:sub_topic).permit(:title, :descr)
+    end  
 
 end

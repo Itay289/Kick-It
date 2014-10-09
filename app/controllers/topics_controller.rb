@@ -49,9 +49,10 @@ class TopicsController < ApplicationController
   end
 
   def update
-    @topic = Topic.find_by(title: params[:id])
-    if @topic.save
+    @topic = Topic.find_by(id: params[:id])
+    if @topic.update(secure_params)
       flash[:notice] = "Your Kick #{@topic.title} has been updated" 
+      redirect_to root_path
     end  
   end
 
@@ -60,6 +61,10 @@ class TopicsController < ApplicationController
     def correct_user
       @topic = Topic.find_by(id: params[:id])
       redirect_to root_url if @topic.nil?
+    end
+
+    def secure_params
+      params.require(:topic).permit(:title, :image)
     end
 	
 end

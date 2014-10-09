@@ -1,2 +1,15 @@
-h3 Edit your Kick
-= render 'new'
+
+div.row
+	div.span6.offset3
+
+		h3 Edit your Item
+
+		= form_for ([@sub_topic]) ,url: topic_sub_topic_path, method: :put do |f| 
+			  = f.label :title 
+			  br
+				= f.text_field :title
+				= f.label :description 
+				br
+				= f.text_area :descr 
+
+				= f.submit "Update Your Item", class: "btn btn-large btn-primary" 

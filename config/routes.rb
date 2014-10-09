@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   	resources :sub_topics do
       member do
         put :upvote
+        put :edit
       end
 
       # collection do

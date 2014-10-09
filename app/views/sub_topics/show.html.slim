@@ -4,8 +4,8 @@ h1 = @sub_topic.title
 
 span.pull-right
   -if current_user && current_user.mail == @sub_topic.created_by
-    = link_to "remove", SubTopic.find_by(id: params[:id]), method: :delete, data: { confirm: "You sure?" }
-    = link_to "edit", SubTopic.find_by(id: params[:id]), method: :edit 
+    = link_to "remove ", SubTopic.find_by(id: params[:id]), method: :delete, data: { confirm: "You sure?" }
+    = link_to "edit", edit_topic_sub_topic_path(id: params[:id])
 
 = render partial: 'comments/comment' 
 

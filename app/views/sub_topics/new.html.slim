@@ -3,7 +3,7 @@ div.row
 
 		h2 Create New Reddit
 
-		= form_for ([@topic,@subtopic]) ,url: topic_sub_topics_path(@topic.title) , html: { method: :post } do |f| 
+		= form_for ([@topic, @subtopic]) ,url: topic_sub_topics_path(@topic.title) , html: { method: :post } do |f| 
 			  = f.label :title 
 			  br
 				= f.text_field :title
