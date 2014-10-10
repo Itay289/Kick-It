@@ -7,8 +7,8 @@ div.comments
   = form_for Comment.new ,url: topic_sub_topic_comments_path(:sub_topic_id => @sub_topic.id , :id => @sub_topic.id) , html: { method: :post } do |f| 
     div.text
       p = f.label :body 
-        = f.text_area :body 
-      	= f.submit "Submit", class: "btn btn-large btn-info" 
+        = f.text_field :body 
+      	= f.submit "Submit", class: "btn btn-info" 
     
 	
   h2.comment-headline = @sub_topic.comments.count.to_s + ' Comments' 
