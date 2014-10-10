@@ -8,7 +8,7 @@ div.comments
     div.text
       p = f.label :body 
         = f.text_area :body 
-      	= f.submit "Submit", class: "btn btn-large btn-primary" 
+      	= f.submit "Submit", class: "btn btn-large btn-info" 
     
 	
   h2.comment-headline = @sub_topic.comments.count.to_s + ' Comments' 

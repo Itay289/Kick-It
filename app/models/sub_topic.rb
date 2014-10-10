@@ -11,4 +11,7 @@ class SubTopic
   embeds_many :comments
   embeds_many :votes
 
+  validates :title, presence: true 
+  validates :descr, presence: true, length: { minimum: 30 }
+
 end

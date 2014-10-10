@@ -27,9 +27,13 @@ class SubTopicsController < ApplicationController
       :title => params[:sub_topic][:title],
       )
 		@topic.sub_topics << sub_topic
-    @topic.save
-		flash[:success] = "Subject created successfully"
-		redirect_to topic_sub_topics_path
+    if @topic.save
+  		flash[:success] = "Subject created successfully"
+  		redirect_to topic_sub_topics_path
+    else
+      flash[:error] = "Fields can't be blank"
+      redirect_to :back  
+    end  
 	end
 
 	def destroy
@@ -70,6 +74,9 @@ class SubTopicsController < ApplicationController
     if @sub_topic.update(secure_params)
       flash[:notice] = "Your Item #{@sub_topic.title} has been updated" 
       redirect_to topic_sub_topic_path
+    else
+      flash[:error] = "Fields can't be blank"
+      redirect_to :back      
     end  
   end
 

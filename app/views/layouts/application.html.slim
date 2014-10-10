@@ -7,7 +7,7 @@ html
 	  = csrf_meta_tags 
 	  title = full_title(yield(:title)) 
 	body
-		= render partial: "shared/flash_messages", flash: flash 
+		= render partial: "shared/flash_messages", flash: flash
 		= render 'layouts/header' 
 		.container
 			= yield 

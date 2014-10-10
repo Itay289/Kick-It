@@ -5,15 +5,18 @@ div.pull-right
   = "created by #{show_name(@topic)}"
 br 
 .reddit
-  = link_to "Create New Item", "#{new_topic_sub_topic_path.to_s}", class: "btn btn-primary"
+  = link_to "Create New Item", "#{new_topic_sub_topic_path.to_s}", class: "btn btn-info"
 
   - @sub_topics.each do |sub_topic|
     div.well.well-small
       div.media
         span.pull-left
           = link_to upvote_topic_sub_topic_path(id: sub_topic.id) , method: :put
-            i.icon-large.media-object.icon-upload
+            i.icon-large.media-object.icon-thumbs-up
           = sub_topic.score 
+        span.pull-right  
+          = sub_topic.comments.count.to_s + " " 
+          i.icon-large.icon-comment 
         div.media-body
           h4.media-heading 
             = link_to "#{sub_topic.title}", "#{topic_sub_topic_path(params[:topic_id], sub_topic.id)}"

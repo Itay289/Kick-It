@@ -20,13 +20,16 @@ class TopicsController < ApplicationController
 		# byebug
 		@topic = Topic.new(
 			:title => params[:topic][:title],
-			:image => uploader.url,
+      :image => uploader.url,
 			:created_by => cookies[:mail],
 			)
-		@topic.save
-
-		flash[:success] = "Subject created successfully"
-    redirect_to topics_path
+		if @topic.save
+			flash[:success] = "Subject created successfully"
+    	redirect_to topics_path
+    else
+      flash[:error] = "Fields can't be blank"
+      redirect_to :back  
+    end  	
 	end
 
 	def destroy	
@@ -49,10 +52,15 @@ class TopicsController < ApplicationController
   end
 
   def update
+  	uploader = ImageUploader.new
+		uploader.store!(params[:topic][:image])
     @topic = Topic.find_by(id: params[:id])
     if @topic.update(secure_params)
       flash[:notice] = "Your Kick #{@topic.title} has been updated" 
       redirect_to root_path
+    else
+      flash[:error] = "Fields can't be blank"
+      redirect_to :back    
     end  
   end
 
