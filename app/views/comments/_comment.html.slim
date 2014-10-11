@@ -2,7 +2,23 @@
 
 div.comments
   
-  h2.comment-headline Add a comment:
+  h2.comment-headline = @sub_topic.comments.count.to_s + ' Comments' 
+
+  - @sub_topic.comments.each do |comment|   
+    ul 
+      li.comment-container
+        i.icon-large.icon-user
+        .comment-section  
+          span.created-by 
+            = "#{comment.mail.to_s.split('@').first}"
+          br  
+          span.comment-body
+            = comment.body 
+          br  
+          span.created-at
+            = "posted #{distance_of_time_in_words_to_now(comment.created_at).to_s}" + ' ago' 
+    
+  h2.comment-add Add a comment:
 
   = form_for Comment.new ,url: topic_sub_topic_comments_path(:sub_topic_id => @sub_topic.id , :id => @sub_topic.id) , html: { method: :post } do |f| 
     div.text
@@ -11,17 +27,4 @@ div.comments
       	= f.submit "Submit", class: "btn btn-info" 
     
 	
-  h2.comment-headline = @sub_topic.comments.count.to_s + ' Comments' 
-
-  - @sub_topic.comments.each do |comment|
-		div.well.well-small
-			div.media
-		  	div.small.media-body
-					= comment.body 
-			  		br.span.pull-right 
-			 			= "posted #{distance_of_time_in_words_to_now(comment.created_at).to_s}" + ' ago by ' "#{comment.mail.to_s.split('@').first}"
-
-
-
-
-
+  

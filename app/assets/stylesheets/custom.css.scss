@@ -268,7 +268,7 @@ aside {
 }
 .comment-headline {
   text-align: left;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 .small {
   border: transparent;
@@ -291,4 +291,34 @@ aside {
 .thumbnail:hover {
   opacity:0.8;
   transform:scale(0.95,0.95);
+}
+.sub-topic-title {
+  text-align: left;
+}
+.comment-section {
+  width: 400px;
+}
+.comment-body {
+  
+}
+.created-at {
+  font-size: 14px;
+  color: #999;
+}
+.comment-add {
+  text-align: left;
+  margin-top: 30px;
+}
+.comment-container {
+  display: inline-flex;
+  margin-bottom: 30px;
+  border-bottom: solid 2px;
+  border-bottom-color: #F0F0F0;
+}
+.icon-user {
+  margin-right: 11px;
+  margin-top: 4px;
+}
+.created-by {
+  font-weight: bolder; 
 }
