@@ -41,7 +41,7 @@ class TopicsController < ApplicationController
 
 	def destroy	
 		if current_user.mail == Topic.find_by(title: params[:id]).created_by
-			@topic.destroy
+			@topic.set(active: false)
 			flash[:success] = "Kick destroyed."
 			redirect_to :back
 		else
