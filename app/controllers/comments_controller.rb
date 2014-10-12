@@ -9,13 +9,7 @@ class CommentsController < ApplicationController
 
   def create
     @topic = Topic.find_by(title: params[:topic_id])
-    subtopics = @topic.sub_topics
-    @subtopic = nil
-    subtopics.each do |sub_t|
-      if sub_t.id.to_s == params[:id]
-        @subtopic = sub_t
-      end
-    end
+    @subtopic = @topic.sub_topics.where(active: true).find_by(id: params[:id])
     comment = Comment.new(
       :mail => cookies[:mail],
       :body => params[:comment][:body],

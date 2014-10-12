@@ -1,4 +1,4 @@
-- provide(:title, 'Topicss') 
+- provide(:title, 'SubTopics') 
 div
   h1 = @topic.title 
 div.pull-right
@@ -12,7 +12,10 @@ br
       div.media
         span.pull-left
           = link_to upvote_topic_sub_topic_path(id: sub_topic.id) , method: :put
-            i.icon-large.media-object.icon-upload
+            - if user_voted(sub_topic.id)
+              i.fa.fa-arrow-circle-o-up.on 
+            - else
+              i.fa.fa-arrow-circle-o-up.off
           = sub_topic.score 
         div.media-body
           h4.media-heading 
@@ -21,6 +24,6 @@ br
           = sub_topic.descr 
           span.pull-right
             br
-              = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{sub_topic.created_by.to_s.split('@').first}"
+              = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{show_name(sub_topic)}"
 
      

@@ -1,11 +1,11 @@
 class SubTopicsController < ApplicationController
-  helper_method :change_score
+  helper_method :user_voted
   before_filter :signed_in_user, only: [:new, :create, :upvote, :destroy]
 	def show
     begin 
       @topic = Topic.where(active: true).find_by(title: params[:topic_id])
       @sub_topic = @topic.sub_topics.where(active: true).find_by(_id: params[:id])
-      @comments =  @sub_topic.where(active: true).comments
+      @comments =  @sub_topic.comments.where(active: true)
     rescue
       redirect_to root_path
     end
@@ -48,7 +48,7 @@ class SubTopicsController < ApplicationController
   def upvote
     topic = Topic.find_by(title: params[:topic_id])
     sub_topic = topic.sub_topics.find_by(id: params[:id])
-    if sub_topic.votes.where(mail: cookies[:mail]).exists?
+    if sub_topic.votes.find_by(mail: cookies[:mail])
       if sub_topic.votes.find_by(mail: cookies[:mail]).voting == 1
         sub_topic.votes.find_by(mail: cookies[:mail]).set(voting: 0)
         sub_topic.inc(score: -1)
@@ -63,9 +63,22 @@ class SubTopicsController < ApplicationController
         )
       sub_topic.inc(score: 1)
     end
-    topic.save!
+    # bug on mongoid - creating empty instances 
+    # https://github.com/mongoid/mongoid/issues/2735
+    sub_topic.votes.where(mail: nil).destroy
+    topic.save
 
     redirect_to topic_sub_topics_path
+  end
+
+  def user_voted(subtopic_id)
+    begin
+      topic = Topic.find_by(title: params[:topic_id])
+      subtopic = topic.sub_topics.find_by(id: subtopic_id)
+      subtopic.votes.where(mail: cookies[:mail]).last.voting == 1 
+    rescue
+      false
+    end
   end
 
 

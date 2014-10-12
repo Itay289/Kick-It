@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 
 /* mixins, variables, etc. */
 
@@ -282,3 +283,11 @@ aside {
 .reddit {
   margin-top: 15px;
 }
+
+.fa-arrow-circle-o-up.on {
+    color: #0088cc;
+  }
+.fa-arrow-circle-o-up.off {
+    color: black;
+  }
+
