@@ -27,15 +27,13 @@ class SubTopicsController < ApplicationController
 	end
 
 	def create
-    @topic = Topic.find_by(title: params[:topic_id])
-    # TODO : change created_by to the user -> params[:session][:mail]
-    sub_topic = SubTopic.new(
+    topic = Topic.find_by(title: params[:topic_id])
+    topic.sub_topics << SubTopic.new(
       :created_by => cookies[:mail],
       :descr => params[:sub_topic][:descr],
       :title => params[:sub_topic][:title],
       )
-		@topic.sub_topics << sub_topic
-    if @topic.save
+    if topic.save
   		flash[:success] = "Subject created successfully"
   		redirect_to topic_sub_topics_path
     else
@@ -46,7 +44,7 @@ class SubTopicsController < ApplicationController
 
 	def destroy
     if current_user.mail == Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).created_by
-      Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).set(:active false)
+      Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).set(active: false)
 		  flash[:success] = "Subject destroyed." 
       redirect_to topic_sub_topics_path
     else
@@ -80,6 +78,7 @@ class SubTopicsController < ApplicationController
   def upvote
     topic = Topic.find_by(title: params[:topic_id])
     sub_topic = topic.sub_topics.find_by(id: params[:id])
+    # byebug
     if sub_topic.votes.find_by(mail: cookies[:mail])
       if sub_topic.votes.find_by(mail: cookies[:mail]).voting == 1
         sub_topic.votes.find_by(mail: cookies[:mail]).destroy

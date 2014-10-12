@@ -26,9 +26,10 @@ describe SubTopicsController do
     before do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean
-      @topic_attrs = {title: "test", image: "1" } 
+      @request.env["HTTP_REFERER"] = root_path
+      @topic_attrs = {title: "test"} 
       @topic = Topic.create @topic_attrs
-      @success_attrs = {topic_id: @topic_attrs[:title], sub_topic: {title: "test title", descr: "test descr" } }
+      @success_attrs = {topic_id: @topic_attrs[:title], sub_topic: {title: "test title", descr: "d"*31 } }
       @failure_attrs = {}
     end
 
@@ -55,26 +56,24 @@ describe SubTopicsController do
 
       context "with valid information" do
         it "should create a Topic" do
-          expect { post :create, @success_attrs }.to change{Topic.find_by(title: "test").sub_topics.count}.by(1)
+          expect { post :create, @success_attrs }.to change{Topic.find_by(title: @topic_attrs[:title]).sub_topics.count}.by(1)
         end
       end
 
       it "should create topic with current user mail" do
         post :create, @success_attrs
-        Topic.last.sub_topics.last.created_by.should eq(@user.mail)
+        Topic.last.reload.sub_topics.last.created_by.should eq(@user.mail)
       end
-
+ 
       describe "PUT upvote" do
         before do
           @sub_topic = SubTopic.new
-          @topic.sub_topics << @sub_topic
+          @topic.sub_topics << SubTopic.new
           @topic.save
         end
 
-        it "should require authentcation" do
-        end
-
-        it "should increase topics score by 1" do
+        it "should increase sub topics score by 1" do
+          byebug
           expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change {@sub_topic.reload.score}.by(1)
         end
 
