@@ -21,9 +21,9 @@ class SubTopicsController < ApplicationController
 	end
 
   def new
+    @title = "Create New Kick"
     @topic = Topic.find_by(title: params[:topic_id])
     @subtopic = SubTopic.new
-    Comment.new
 	end
 
 	def create
@@ -31,26 +31,58 @@ class SubTopicsController < ApplicationController
     # TODO : change created_by to the user -> params[:session][:mail]
     sub_topic = SubTopic.new(
       :created_by => cookies[:mail],
-      :descr => params[:sub_topic][:desc],
+      :descr => params[:sub_topic][:descr],
       :title => params[:sub_topic][:title],
       )
 		@topic.sub_topics << sub_topic
-    @topic.save
-		flash[:success] = "Subject created successfully"
-		redirect_to topic_sub_topics_path
+    if @topic.save
+  		flash[:success] = "Subject created successfully"
+  		redirect_to topic_sub_topics_path
+    else
+      flash[:error] = "Fields can't be blank, description can't be less than 30 characters"
+      redirect_to :back  
+    end  
 	end
 
 	def destroy
-		@sub_topics = SubTopic.find(params[:id]).destroy
-		flash[:success] = "Subject destroyed."
+    if current_user.mail == Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).created_by
+      Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).destroy
+		  flash[:success] = "Subject destroyed." 
+      redirect_to topic_sub_topics_path
+    else
+      flash[:error] = "You cant destroy this item."
+      redirect_to :back       
+    end  
 	end
+
+  def edit
+    @title = "Update Your Kick"
+    @topic = Topic.find_by(title: params[:topic_id])
+    @subtopic = @topic.sub_topics.find_by(id: params[:id])
+    if current_user.mail != @subtopic.created_by
+      flash[:notice] ="Sorry, you can't edit this Kick"
+      redirect_to :back
+    end
+    render :new
+  end
+
+  def update
+    @sub_topic = Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id])
+    if @sub_topic.update(secure_params)
+      flash[:notice] = "Your Item #{@sub_topic.title} has been updated" 
+      redirect_to topic_sub_topic_path
+    else
+      flash[:error] = "Fields can't be blank"
+      redirect_to :back      
+    end  
+  end
 
   def upvote
     topic = Topic.find_by(title: params[:topic_id])
     sub_topic = topic.sub_topics.find_by(id: params[:id])
     if sub_topic.votes.find_by(mail: cookies[:mail])
       if sub_topic.votes.find_by(mail: cookies[:mail]).voting == 1
-        sub_topic.votes.find_by(mail: cookies[:mail]).set(voting: 0)
+        sub_topic.votes.find_by(mail: cookies[:mail]).destroy
         sub_topic.inc(score: -1)
       else
         sub_topic.votes.find_by(mail: cookies[:mail]).set(voting: 1)
@@ -82,8 +114,10 @@ class SubTopicsController < ApplicationController
   end
 
 
-  protected
-
-
+  private
+    
+    def secure_params
+      params.require(:sub_topic).permit(:title, :descr)
+    end  
 
 end

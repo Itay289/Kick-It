@@ -1,11 +1,12 @@
 - provide(:title, 'SubTopics') 
 div
   h1 = @topic.title 
+         
 div.pull-right
   = "created by #{show_name(@topic)}"
 br 
 .reddit
-  = link_to "Write New Reddit", "#{new_topic_sub_topic_path.to_s}"
+  = link_to "Create New Item", "#{new_topic_sub_topic_path.to_s}", class: "btn btn-info"
 
   - @sub_topics.each do |sub_topic|
     div.well.well-small
@@ -17,13 +18,17 @@ br
             - else
               i.fa.fa-arrow-circle-o-up.off
           = sub_topic.score 
+        span.pull-right  
+          = sub_topic.comments.count.to_s + " " 
+          i.icon-large.icon-comment 
         div.media-body
           h4.media-heading 
             = link_to "#{sub_topic.title}", "#{topic_sub_topic_path(params[:topic_id], sub_topic.id)}"
-            br
-          = sub_topic.descr 
+          br
+            = sub_topic.descr 
           span.pull-right
             br
               = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{show_name(sub_topic)}"
+
 
      

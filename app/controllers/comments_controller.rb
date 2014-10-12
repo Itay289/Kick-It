@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 
       )
     @subtopic.comments << comment
-    @topic.save
+    @subtopic.save
     redirect_to topic_sub_topic_path(:id => @subtopic.id)
   end
 
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:mail, :body, :name)
+      params.require(:comment).permit(:mail, :body)
     end
     
 end
