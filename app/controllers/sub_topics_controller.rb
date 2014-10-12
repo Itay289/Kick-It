@@ -13,9 +13,9 @@ class SubTopicsController < ApplicationController
 	end
 
   def new
+    @title = "Create New Kick"
     @topic = Topic.find_by(title: params[:topic_id])
     @subtopic = SubTopic.new
-    Comment.new
 	end
 
 	def create
@@ -31,7 +31,7 @@ class SubTopicsController < ApplicationController
   		flash[:success] = "Subject created successfully"
   		redirect_to topic_sub_topics_path
     else
-      flash[:error] = "Fields can't be blank"
+      flash[:error] = "Fields can't be blank, description can't be less than 30 characters"
       redirect_to :back  
     end  
 	end
@@ -61,12 +61,14 @@ class SubTopicsController < ApplicationController
   end
 
   def edit
+    @title = "Update Your Kick"
     @topic = Topic.find_by(title: params[:topic_id])
-    @sub_topic = @topic.sub_topics.find_by(id: params[:id])
-    if current_user.mail != @sub_topic.created_by
+    @subtopic = @topic.sub_topics.find_by(id: params[:id])
+    if current_user.mail != @subtopic.created_by
       flash[:notice] ="Sorry, you can't edit this Kick"
       redirect_to :back
-    end  
+    end
+    render :new
   end
 
   def update
@@ -85,7 +87,7 @@ class SubTopicsController < ApplicationController
     sub_topic = topic.sub_topics.find_by(id: params[:id])
     if sub_topic.votes.where(mail: cookies[:mail]).exists?
       if sub_topic.votes.find_by(mail: cookies[:mail]).voting == 1
-        sub_topic.votes.find_by(mail: cookies[:mail]).set(voting: 0)
+        sub_topic.votes.find_by(mail: cookies[:mail]).destroy
         sub_topic.inc(score: -1)
       else
         sub_topic.votes.find_by(mail: cookies[:mail]).set(voting: 1)

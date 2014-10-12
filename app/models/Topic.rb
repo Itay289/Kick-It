@@ -10,5 +10,8 @@ class Topic
 
   validates :title, presence: true
 
+  def to_param
+    title
+  end
 
 end

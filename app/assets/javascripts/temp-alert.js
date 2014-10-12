@@ -12,3 +12,4 @@ $(document).ready(function(){
   window.setTimeout(removeAlert,3000);
 
 });
+

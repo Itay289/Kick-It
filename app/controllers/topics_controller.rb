@@ -11,10 +11,11 @@ class TopicsController < ApplicationController
 	end
 
 	def new
-		@topics = Topic.new
+		@topic = Topic.new
 	end
 
 	def create
+    puts params
 		uploader = ImageUploader.new
 		uploader.store!(params[:topic][:image])
 		# byebug
@@ -33,13 +34,13 @@ class TopicsController < ApplicationController
 	end
 
 	def destroy	
-		if current_user.mail == Topic.find_by(id: params[:id]).created_by
+		if current_user.mail == Topic.find_by(title: params[:id]).created_by
 			@topic.destroy
 			flash[:success] = "Kick destroyed."
 			redirect_to :back
 		else
 			flash[:error] = "You cant destroy this Kick."
-			redirect_to :back
+			redirect_to root_path
 		end
 	end
 
@@ -54,7 +55,7 @@ class TopicsController < ApplicationController
   def update
   	uploader = ImageUploader.new
 		uploader.store!(params[:topic][:image])
-    @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.find_by(title: params[:id])
     if @topic.update(secure_params)
       flash[:notice] = "Your Kick #{@topic.title} has been updated" 
       redirect_to root_path
@@ -67,7 +68,7 @@ class TopicsController < ApplicationController
 	private
 
     def correct_user
-      @topic = Topic.find_by(id: params[:id])
+      @topic = Topic.find_by(title: params[:id])
       redirect_to root_url if @topic.nil?
     end
 

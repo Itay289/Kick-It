@@ -1,9 +1,9 @@
 div.row
 	div.span6.offset3
 
-		h2 Create New Reddit
+		h2 = @title
 
-		= form_for ([@topic, @subtopic]) ,url: topic_sub_topics_path(@topic.title) , html: { method: :post } do |f| 
+		= form_for ([@topic, @subtopic]) do |f| 
 			  = f.label :title 
 			  br
 				= f.text_field :title
