@@ -14,18 +14,21 @@ class TopicsController < ApplicationController
 	end
 
 	def new
+    @title = "Create new Kick"
 		@topic = Topic.new
 	end
 
 	def create
     puts params
-		uploader = ImageUploader.new
-		uploader.store!(params[:topic][:image])
-		# byebug
+		uploader_image_file = ImageUploader.new
+    uploader_image_file.store!(params[:topic][:image_file])
+    uploader_image_url = ImageUploader.new
+    uploader_image_url.store!(params[:topic][:image_url])
 		@topic = Topic.new(
-			:title => params[:topic][:title],
-      :image => uploader.url,
-			:created_by => cookies[:mail],
+			title: params[:topic][:title],
+      image_file: uploader_image_file.url,
+      image_url: uploader_image_url.url,
+			created_by: cookies[:mail],
 			)
 		if @topic.save
 			flash[:success] = "Subject created successfully"
@@ -48,16 +51,22 @@ class TopicsController < ApplicationController
 	end
 
 	def edit
+    @title = "Edit Your Kick"
     @topic = Topic.find_by(title: params[:id])
     if current_user.mail != @topic.created_by
       flash[:notice] ="Sorry, you can't edit this Kick"
       redirect_to :back
     end  
+    render :new
   end
 
   def update
-  	uploader = ImageUploader.new
-		uploader.store!(params[:topic][:image])
+  	uploader_image_file = ImageUploader.new
+    uploader_image_file.store!(params[:topic][:image_file])
+    uploader_image_url = ImageUploader.new
+    uploader_image_url.store!(params[:topic][:image_url])
+    params[:topic][:image_file] = uploader_image_file.url
+    params[:topic][:image_url] = uploader_image_url.url
     @topic = Topic.find_by(title: params[:id])
     if @topic.update(secure_params)
       flash[:notice] = "Your Kick #{@topic.title} has been updated" 
@@ -76,7 +85,7 @@ class TopicsController < ApplicationController
     end
 
     def secure_params
-      params.require(:topic).permit(:title, :image)
+      params.require(:topic).permit(:title, :image_file, :image_url)
     end
 	
 end
