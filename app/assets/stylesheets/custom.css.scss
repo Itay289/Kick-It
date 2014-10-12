@@ -284,11 +284,13 @@ aside {
   margin-top: 15px;
 }
 
-.fa-arrow-circle-o-up.on {
-    color: #0088cc;
+.fa.fa-thumbs-up.on {
+    color: #0066FF;
+    font-size: 20px;
   }
-.fa-arrow-circle-o-up.off {
+.fa.fa-thumbs-up.off {
     color: black;
+    font-size: 20px;
   }
 
 
@@ -335,4 +337,11 @@ aside {
 .switch {
   color: red;
 }
+.score {
+  font-size: 20px;
+}
+.score-section {
+  width: 25px;
+}
+
 

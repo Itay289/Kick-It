@@ -46,7 +46,7 @@ class SubTopicsController < ApplicationController
 
 	def destroy
     if current_user.mail == Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).created_by
-      Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).set(:active false)
+      Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).set(active: false)
 		  flash[:success] = "Subject destroyed." 
       redirect_to topic_sub_topics_path
     else
