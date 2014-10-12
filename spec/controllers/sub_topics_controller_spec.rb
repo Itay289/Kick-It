@@ -26,9 +26,10 @@ describe SubTopicsController do
     before do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean
-      @topic_attrs = {title: "test", image: "1" } 
+      @request.env["HTTP_REFERER"] = root_path
+      @topic_attrs = {title: "test"} 
       @topic = Topic.create @topic_attrs
-      @success_attrs = {topic_id: @topic_attrs[:title], sub_topic: {title: "test title", descr: "test descr" } }
+      @success_attrs = {topic_id: @topic_attrs[:title], sub_topic: {title: "test title", descr: "test descr"*30 } }
       @failure_attrs = {}
     end
 
@@ -66,47 +67,41 @@ describe SubTopicsController do
 
       describe "PUT upvote" do
         before do
-          @sub_topic = SubTopic.new
-          @topic.sub_topics << @sub_topic
-          @topic.save
+          post :create, @success_attrs
         end
 
         it "should require authentcation" do
         end
 
         it "should increase topics score by 1" do
-          expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change {@sub_topic.reload.score}.by(1)
+          expect {put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title}.to change {Topic.last.sub_topics.last.reload.score}.by(1)
         end
 
         it "should redirect to topic sub topics path" do
-          put :upvote, id: @sub_topic.id, topic_id: @topic.title
+          put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title
           response.should redirect_to topic_sub_topics_path
         end
 
         describe "should set voting values to the current user" do
-          before {put :upvote, id: @sub_topic.id, topic_id: @topic.title}
+          before {put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title}
           subject {Topic.last.sub_topics.last.votes.last}
           its(:mail) {should eq @user.mail}
           its(:voting) {should eq 1}
         end
 
         context "user already voted" do
-          before {put :upvote, id: @sub_topic.id, topic_id: @topic.title}
+          before {put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title}
 
-          it "should not add user to votes" do 
-            expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change{Topic.last.sub_topics.last.votes.count}.by(0) 
+          it "should delete user from votes" do 
+            expect {put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title}.to change{Topic.last.sub_topics.last.votes.count}.by(-1) 
           end
 
           context "user voted before" do 
             context "user vote is 1" do 
               before {topic = Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).set(voting: 1)}
             
-              it "should change user vote to 0" do 
-                put :upvote, id: @sub_topic.id, topic_id: @topic.title
-                Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).voting.should eq 0
-              end
               it "should decriminate the score" do
-                expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change{Topic.last.sub_topics.last.score}.by(-1) 
+                expect {put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title}.to change{Topic.last.sub_topics.last.score}.by(-1) 
               end
             end
 
@@ -114,11 +109,11 @@ describe SubTopicsController do
               before {topic = Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).set(voting: 0)}
 
               it "should change user vote to 1" do 
-                put :upvote, id: @sub_topic.id, topic_id: @topic.title
+                put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title
                 Topic.last.sub_topics.last.votes.find_by(mail: @user.mail).voting.should eq 1
               end
               it "should incriminate the score" do
-                expect {put :upvote, id: @sub_topic.id, topic_id: @topic.title}.to change{Topic.last.sub_topics.last.score}.by(1) 
+                expect {put :upvote, id: Topic.last.sub_topics.last.id, topic_id: Topic.last.title}.to change{Topic.last.sub_topics.last.score}.by(1) 
               end
             end
             
