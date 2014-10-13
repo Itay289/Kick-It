@@ -8,15 +8,14 @@ div.row
 
 		  = f.label :title 
 		  = f.text_field :title 
-
-		  br
-			= f.submit "Create New Topic", class: "btn btn-info"
+		  br			
 			p
 				= f.file_field :image_file
 			p
-				= f.label :image_url, "Or Url"	 
+				= f.label :image_url, "Or URL"	 
 				= f.text_field :image_url
-			
+				
+			= f.submit "Create New Topic", class: "btn btn-info"
 			
 			
 	

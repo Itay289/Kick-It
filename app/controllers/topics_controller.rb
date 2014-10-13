@@ -23,7 +23,8 @@ class TopicsController < ApplicationController
 		uploader_image_file = ImageUploader.new
     uploader_image_file.store!(params[:topic][:image_file])
     uploader_image_url = ImageUploader.new
-    uploader_image_url.store!(params[:topic][:image_url])
+    uploader_image_url.download! params[:topic][:image_url]
+    uploader_image_url.store!
 		@topic = Topic.new(
 			title: params[:topic][:title],
       image_file: uploader_image_file.url,
@@ -64,7 +65,8 @@ class TopicsController < ApplicationController
   	uploader_image_file = ImageUploader.new
     uploader_image_file.store!(params[:topic][:image_file])
     uploader_image_url = ImageUploader.new
-    uploader_image_url.store!(params[:topic][:image_url])
+    uploader_image_url.download! params[:topic][:image_url]
+    uploader_image_url.store!
     params[:topic][:image_file] = uploader_image_file.url
     params[:topic][:image_url] = uploader_image_url.url
     @topic = Topic.find_by(title: params[:id])

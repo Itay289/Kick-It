@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 				flash[:success] = "Welcome #{user.mail.to_s.split('@').first}"   
 			end	
 			sign_in user
-			redirect_back_or root_path
+			redirect_back_to root_path
 		else
 			flash[:error] = "Please fill in valid information"
       redirect_to :back 

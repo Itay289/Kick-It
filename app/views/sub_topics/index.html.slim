@@ -11,13 +11,13 @@ br
   - @sub_topics.each do |sub_topic|
     div.well.well-small
       div.media
-        span.pull-left
+        span.score-section.pull-left
           = link_to upvote_topic_sub_topic_path(id: sub_topic.id) , method: :put
-            - if user_voted(sub_topic.id)
-              i.fa.fa-arrow-circle-o-up.on 
-            - else
-              i.fa.fa-arrow-circle-o-up.off
-          = sub_topic.score 
+              - if user_voted(sub_topic.id)
+                i.fa.fa-thumbs-up.on
+              - else
+                i.fa.fa-thumbs-up.off 
+              span.score = sub_topic.score 
         span.pull-right  
           = sub_topic.comments.count.to_s + " " 
           i.icon-large.icon-comment 
