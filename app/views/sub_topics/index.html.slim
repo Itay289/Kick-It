@@ -23,7 +23,9 @@ br
           i.icon-large.icon-comment 
         div.media-body
           h4.media-heading 
-            = link_to "#{sub_topic.title}", "#{topic_sub_topic_path(params[:topic_id], sub_topic.id)}"
+            = link_to "#{sub_topic.title} ", "#{topic_sub_topic_path(params[:topic_id], sub_topic.id)}"
+            -if !sub_topic.url.blank?
+              a.i.fa.fa-link href = sub_topic.url
           br
             = sub_topic.descr 
           span.pull-right

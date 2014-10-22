@@ -32,6 +32,7 @@ class SubTopicsController < ApplicationController
       :created_by => cookies[:mail],
       :descr => params[:sub_topic][:descr],
       :title => params[:sub_topic][:title],
+      url: params[:sub_topic][:url]
       )
     if topic.save
   		flash[:success] = "Subject created successfully"
@@ -116,7 +117,7 @@ class SubTopicsController < ApplicationController
   private
     
     def secure_params
-      params.require(:sub_topic).permit(:title, :descr)
+      params.require(:sub_topic).permit(:title, :descr, :url)
     end  
 
 end
