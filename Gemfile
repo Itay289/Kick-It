@@ -30,6 +30,7 @@ gem 'spring',        group: :development
 
 gem 'slim'
 gem 'yajl'
+gem 'yajl-ruby'
 
 gem 'database_cleaner'
 
