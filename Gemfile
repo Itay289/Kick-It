@@ -29,6 +29,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'slim'
+gem 'yajl'
 
 gem 'database_cleaner'
 
@@ -42,6 +43,12 @@ gem "mongoid", "~> 4.0.0"
 gem 'faker', '1.4.3'
 
 gem 'rmagick'
+
+gem 'unicorn'
+gem 'god'
+
+gem 'capistrano',  '~> 3.1'
+gem 'capistrano-rails', '~> 1.1'
 
 gem 'carrierwave', '0.8.0'
 group :development, :test do
