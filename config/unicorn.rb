@@ -1,7 +1,7 @@
 RAILS_ROOT = "/home/deploy/Kick-It/current"
 
 listen 8001
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 4)
+worker_processes 4
 timeout 15
 preload_app true
 
