@@ -1,4 +1,4 @@
-RAILS_ROOT = "/home/deploy/ftbpro/current"
+RAILS_ROOT = "/home/deploy/Kick-It/current"
 
 listen 8001
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 4)
