@@ -1,8 +1,10 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'Kick-It'                       # application name
+set :application, 'Kick-It'                               # application name
 set :repo_url, 'https://github.com/Itay289/Kick-It.git'   # your repo url
+
+# need to change to master branch
 set :branch, 'dev' 
 set :deploy_to, '/home/deploy/#{fetch(:application}'
 set :deploy_user, 'deploy'
@@ -10,10 +12,8 @@ set :deploy_user, 'deploy'
 set :scm, :git
 set :format, :pretty
 set :keep_releases, 5
-# need to change to master branch
 
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -45,25 +45,3 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
-end

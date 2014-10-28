@@ -1,24 +1,20 @@
 namespace :deploy do
 
-  desc "Makes sure local git is in sync with remote."
-  task :check_revision do
-    unless `git rev-parse HEAD` == `git rev-parse origin/master`
-      puts "WARNING: HEAD is not the same as origin/master"
-      puts "Run `git push` to sync changes."
-      exit
+  desc "start god."
+  task :start_god do
+    on roles(:app) do
+      execute "bundle exec god -c /config/god/main"
     end
   end
 
- 
-    desc "start god."
-    task :start do
-      on roles(:app) do
-        execute "bundle exec god -c /config/god/main"
-      end
+  desc "start god."
+  task :stop_god do
+    on roles(:app) do
+      execute "bundle exec god terminate"
     end
+  end
 
-  before :deploy, "deploy:check_revision"
-  after :deploy, "deploy:start"
-  after :rollback, "deploy:start"
+  before :deploy, "deploy:stop_god"
+  after :deploy, "deploy:start_god"
 
 end
