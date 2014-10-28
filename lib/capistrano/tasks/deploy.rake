@@ -7,8 +7,10 @@ namespace :deploy do
   desc "start god"
   task :start_god do
     on roles(:web) do
-      within release_path do
-        execute :bundle, "exec god -c config/god/main.rb"
+      with rails_env: fetch(:stage) do
+        within release_path do
+          execute :bundle, "exec god -c config/god/main.rb"
+        end
       end
     end
   end

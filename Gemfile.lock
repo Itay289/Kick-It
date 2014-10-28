@@ -28,6 +28,11 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    aws-sdk-core (2.0.0.rc6)
+      builder (~> 3.0)
+      jamespath
+      multi_json (~> 1.0)
+      multi_xml (~> 0.5)
     bootstrap-sass (2.3.2.0)
       sass (~> 3.2)
     bson (2.3.0)
@@ -37,6 +42,8 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
+    cap-aws-ec2 (0.0.1)
+      aws-sdk-core (~> 2.0.0.rc2)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -99,6 +106,7 @@ GEM
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.6.11)
+    jamespath (0.5.0)
     jbuilder (2.2.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -128,6 +136,7 @@ GEM
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
@@ -241,6 +250,7 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   bson_ext
   byebug
+  cap-aws-ec2
   capistrano (~> 3.1)
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)
