@@ -1,15 +1,19 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'kickit'                       # application name
-set :repo_url, 'git@github.com:Itay289/Kick-It.git'   # your repo url
-set :deploy_to, '/home/deploy/ftbpro'
+set :application, 'Kick-It'                       # application name
+set :repo_url, 'https://github.com/Itay289/Kick-It.git'   # your repo url
+set :branch, 'dev' 
+set :deploy_to, '/home/deploy/#{fetch(:application}'
+set :deploy_user, 'deploy'
+
 set :scm, :git
 set :format, :pretty
 set :keep_releases, 5
 # need to change to master branch
-set :branch, 'dev' 
+
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call

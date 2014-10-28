@@ -1,11 +1,16 @@
-RAILS_ROOT = "/home/deploy/Kick-It/current"
+root = "/home/deploy/Kick-It/current"
 
 listen 8001
 worker_processes 4
 timeout 15
 preload_app true
 
-working_directory RAILS_ROOT
+working_directory toot
+
+pid "#{root}/tmp/pids/unicorn.pid"
+stderr_path "#{root}/log/unicorn.log"
+stdout_path "#{root}/log/unicorn.log"
+
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
