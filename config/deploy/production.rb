@@ -5,6 +5,7 @@
 # property set.  Don't declare `role :all`, it's a meta role.
 set :stage, :production
 set :rails_env, :production
+set :application, "Kick-It"
 
 # role :app, %w{deploy@example.com}
 # role :web, %w{deploy@example.com}

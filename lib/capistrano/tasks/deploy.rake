@@ -2,18 +2,19 @@ namespace :deploy do
 
   root_dir = "/home/deploy/Kick-It"
   shared_dir = "#{root_dir}/shared"
+  current_path = "#{root_dir}/current"
 
-  desc "start god."
+  desc "start god"
   task :start_god do
     on roles(:app) do
-      execute "#{root_dir}/current bundle exec god -c /config/god/main"
+      execute "#{root_dir}/current bundle exec god -c /config/god/main.rb"
     end
   end
 
-  desc "start god."
+  desc "start god"
   task :stop_god do
     on roles(:app) do
-      execute "bundle exec god terminate"
+      execute "cd #{current_path}" , "bundle exec god terminate"
     end
   end
 
