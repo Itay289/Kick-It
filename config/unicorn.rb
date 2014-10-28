@@ -5,7 +5,7 @@ worker_processes 4
 timeout 15
 preload_app true
 
-working_directory toot
+working_directory root
 
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
