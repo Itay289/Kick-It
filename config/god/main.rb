@@ -1,8 +1,6 @@
 config_path = File.expand_path(File.join(File.dirname(__FILE__), "../"))
-puts "config path is"
-puts config_path
 
-God.pid_file_directory = '/home/deploy/'
+God.pid_file_directory = '/home/deploy/Kick-It/tmp/pid'
 
 God.watch do |w|
   w.name = "unicorn"
