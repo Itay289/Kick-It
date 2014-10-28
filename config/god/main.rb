@@ -1,6 +1,7 @@
+puts "RAILS_ENV is #{ENV["RAILS_ENV"]}"
 config_path = File.expand_path(File.join(File.dirname(__FILE__), "../"))
 
-God.pid_file_directory = '/home/deploy/Kick-It/tmp/pids'
+God.pid_file_directory = '/home/deploy/Kick-It/shared/pids'
 
 God.watch do |w|
   w.name = "unicorn"

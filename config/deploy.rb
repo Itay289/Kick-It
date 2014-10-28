@@ -28,7 +28,7 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+# set :log_level, :info
 
 # Default value for :pty is false
 # set :pty, true
