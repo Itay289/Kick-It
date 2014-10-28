@@ -2,6 +2,8 @@ config_path = File.expand_path(File.join(File.dirname(__FILE__), "../"))
 puts "config path is"
 puts config_path
 
+God.pid_file_directory = '/home/deploy/'
+
 God.watch do |w|
   w.name = "unicorn"
   w.start = "bundle exec unicorn -c #{config_path}/unicorn.rb -E production"
