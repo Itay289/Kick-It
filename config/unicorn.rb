@@ -1,4 +1,5 @@
 root = "/home/deploy/Kick-It/current"
+shared_path = "/home/deploy/Kick-It/shared"
 
 listen 8001
 worker_processes 4
@@ -7,7 +8,7 @@ preload_app true
 
 working_directory root
 
-pid "#{root}/tmp/pids/unicorn.pid"
+pid "#{shared_path}/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 
