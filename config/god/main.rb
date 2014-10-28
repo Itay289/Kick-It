@@ -1,4 +1,6 @@
 config_path = File.expand_path(File.join(File.dirname(__FILE__), "../"))
+puts "config path is"
+puts config_path
 
 God.watch do |w|
   w.name = "unicorn"
