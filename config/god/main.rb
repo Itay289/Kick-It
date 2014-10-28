@@ -3,7 +3,7 @@ config_path = File.expand_path(File.join(File.dirname(__FILE__), "../"))
 God.pid_file_directory = '/home/deploy/Kick-It/shared/pids'
 
 God.watch do |w|
-  pid_file = "#{pid_file_directory}/unicorn.pid"
+  pid_file = "#{God.pid_file_directory}/unicorn.pid"
   
   w.name = "unicorn"
   w.start = "bundle exec unicorn -c #{config_path}/unicorn.rb -E #{ENV["RAILS_ENV"]} -D"
