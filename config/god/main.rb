@@ -7,9 +7,6 @@ God.watch do |w|
   pid_file = "#{God.pid_file_directory}/unicorn.pid"
   
   w.name = "unicorn"
-  # if ENV['RAILS_ENV'] == nil 
-  #   ENV['RAILS_ENV'] = 'production'
-  # end
   w.start = "cd #{rails_root} && BUNDLE_GEMFILE=#{rails_root}/Gemfile bundle exec unicorn -c #{config_path}/unicorn.rb -E #{ENV["RAILS_ENV"]} -D"
   w.restart = "kill -s USR2 $(cat #{pid_file})"
   w.keepalive(memory_max: 150.megabytes, cpu_max: 50.percent)

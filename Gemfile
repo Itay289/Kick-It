@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use SCSS for stylesheets
@@ -26,36 +25,31 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-
 gem 'slim'
 gem 'yajl-ruby'
 
-gem 'database_cleaner'
-
-# use mongoDB as database 
-# gem 'mongo_mapper'
 gem "font-awesome-rails"
 
+# use mongoDB as database 
 gem "mongoid", "~> 4.0.0"
-
-# use faker to create fake
-gem 'faker', '1.4.3'
 
 gem 'rmagick'
 
+# Use unicorn as the app server
 gem 'unicorn'
 gem 'god'
 
-gem 'capistrano',  '~> 3.1'
-gem 'capistrano-rails', '~> 1.1'
-gem 'capistrano-bundler', '~> 1.1.2'
-
-gem 'cap-aws-ec2', require: false
-
-
 gem 'carrierwave', '0.8.0'
+
 group :development, :test do
+  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem "aws-sdk-core", "~> 2.0.0.rc2"
+  # gem 'cap-awscap-aws-ec2', require: false
+  gem 'spring'
+  gem 'database_cleaner'
+  gem 'faker', '1.4.3'
   gem "rspec-rails", '~> 2.14.0.rc1'
 	gem 'spork-rails'
   gem 'guard-spork'
@@ -68,9 +62,6 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

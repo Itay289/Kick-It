@@ -42,8 +42,6 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
-    cap-aws-ec2 (0.0.1)
-      aws-sdk-core (~> 2.0.0.rc2)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -247,10 +245,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk-core (~> 2.0.0.rc2)
   bootstrap-sass (= 2.3.2.0)
   bson_ext
   byebug
-  cap-aws-ec2
   capistrano (~> 3.1)
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)

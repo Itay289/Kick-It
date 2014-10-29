@@ -15,6 +15,13 @@ set :keep_releases, 5
 
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
+require File.expand_path('../../lib/cap-aws-ec2', __FILE__) 
+set :aws_key_id, ENV['AWS_ACCESS_KEY_ID']
+set :secret_access_key, ENV['AWS_SECRET_ACCESS_KEY']
+set :aws_region, 'us-west-2' 
+set :ec2_project, 'Kick-It'
+set :ec2_env, "production" 
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
