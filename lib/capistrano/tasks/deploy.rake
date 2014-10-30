@@ -8,7 +8,7 @@ namespace :deploy do
     on roles(:web) do
       within release_path do
         begin
-          execute :bundle, "exec god restart"
+          execute :bundle, "exec god restart unicorn"
         rescue
           execute :bundle, "exec god -c config/god/main.rb"
         end
