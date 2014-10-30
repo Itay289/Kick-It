@@ -2,10 +2,6 @@ class TopicsController < ApplicationController
 	before_filter :signed_in_user, only: [:new, :create, :destroy]
 	before_filter :correct_user, only: :destroy
 
-	def show
-
-	end
-
 	def index
 		@topics = Topic.where(active: true).all
 		if @topics == nil
@@ -19,9 +15,11 @@ class TopicsController < ApplicationController
 	end
 
 	def create
-    puts params
+    # if image is local file
 		uploader_image_file = ImageUploader.new
     uploader_image_file.store!(params[:topic][:image_file])
+
+    # if image is a url
     uploader_image_url = ImageUploader.new
     uploader_image_url.download! params[:topic][:image_url]
     uploader_image_url.store!
@@ -62,11 +60,15 @@ class TopicsController < ApplicationController
   end
 
   def update
+    # if image is local file
   	uploader_image_file = ImageUploader.new
     uploader_image_file.store!(params[:topic][:image_file])
+
+    # if image is a url
     uploader_image_url = ImageUploader.new
     uploader_image_url.download! params[:topic][:image_url]
     uploader_image_url.store!
+
     params[:topic][:image_file] = uploader_image_file.url
     params[:topic][:image_url] = uploader_image_url.url
     @topic = Topic.find_by(title: params[:id])

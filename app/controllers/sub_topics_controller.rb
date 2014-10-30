@@ -1,7 +1,8 @@
 class SubTopicsController < ApplicationController
   helper_method :user_voted
   before_filter :signed_in_user, only: [:new, :create, :upvote, :destroy]
-	def show
+	
+  def show
     begin 
       @topic = Topic.where(active: true).find_by(title: params[:topic_id])
       @sub_topic = @topic.sub_topics.where(active: true).find_by(_id: params[:id])
@@ -44,7 +45,7 @@ class SubTopicsController < ApplicationController
 	end
 
 	def destroy
-    if current_user.mail == Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).created_by
+    if current_user.mail == owner_of(params[:topic_id], params[:id])
       Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).set(active: false)
 		  flash[:success] = "Subject destroyed." 
       redirect_to topic_sub_topics_path
@@ -118,6 +119,10 @@ class SubTopicsController < ApplicationController
     
     def secure_params
       params.require(:sub_topic).permit(:title, :descr, :url)
-    end  
+    end 
+
+    def owner_of(topic_title, sub_topic_id)
+      Topic.find_by(title: topic_title).sub_topics.find_by(id: sub_topic_id).created_by
+    end
 
 end

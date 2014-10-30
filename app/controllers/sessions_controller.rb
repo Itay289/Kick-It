@@ -1,9 +1,5 @@
 class SessionsController < ApplicationController
 
-	def new
-		
-	end
-
 	def create
 		@user_data = User.new(mail: params[:session][:mail])
 		user = User.find_by(mail: params[:session][:mail])
@@ -25,10 +21,6 @@ class SessionsController < ApplicationController
 	def destroy
 		sign_out
 		redirect_to :back
-	end
-
-	def inde
-		
 	end
 
 end

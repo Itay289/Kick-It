@@ -2,27 +2,15 @@ namespace :deploy do
 
   root_dir = "/home/deploy/Kick-It"
   shared_dir = "#{root_dir}/shared"
-  current_path = "#{root_dir}/current"
 
-  desc "start god"
-  task :start_god do
-    on roles(:web) do
-      with rails_env: fetch(:stage) do
-        within release_path do
-          execute :bundle, "exec god -c config/god/main.rb"
-        end
-      end
-    end
-  end
-
-  desc "stop god"
-  task :stop_god do
+  desc "restart god"
+  task :restart_god do
     on roles(:web) do
       within release_path do
         begin
-          execute :bundle, "exec god terminate"
+          execute :bundle, "exec god restart"
         rescue
-          info " god already stopped"
+          execute :bundle, "exec god -c config/god/main.rb"
         end
       end
     end
@@ -51,7 +39,6 @@ namespace :deploy do
 
 end
 
-before :deploy, "deploy:stop_god"
 after :deploy, "deploy:bundle_install"
 after :deploy, "deploy:assets_precompile"
-after :deploy, "deploy:start_god"
+after :deploy, "deploy:restart_god"
