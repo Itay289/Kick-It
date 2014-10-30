@@ -1,5 +1,3 @@
-require 'database_cleaner'
-
 namespace :dbtest do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -23,6 +21,8 @@ namespace :dbtest do
 end
 
 def clean_data
+  require 'database_cleaner'
+  
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
 end
