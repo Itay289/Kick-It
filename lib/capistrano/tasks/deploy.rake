@@ -32,6 +32,7 @@ namespace :deploy do
   task :bundle_install do
     on roles(:app) do
       within release_path do
+        info "gggggggggggg"
         execute :bundle, "install --gemfile #{release_path}/Gemfile --path #{shared_dir}/bundle --deployment --quiet --without development test"
       end
     end

@@ -4,7 +4,6 @@ lock '3.2.1'
 set :application, 'Kick-It'                               # application name
 set :repo_url, 'https://github.com/Itay289/Kick-It.git'   # your repo url
 
-# need to change to master branch
 set :branch, 'master' 
 set :deploy_to, "/home/deploy/#{fetch(:application)}"
 set :deploy_user, 'deploy'

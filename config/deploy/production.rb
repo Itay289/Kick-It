@@ -7,9 +7,9 @@
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
 
-# definw_servers -> [IP, Roles]: ["54.184.132.42", "app", "web"] 
+# define_servers -> [IP, Roles]: ["54.184.132.42", "app", "web"] 
 define_servers.each do |s|
-  server s[0] , user: 'deploy', roles: %w{s[1 , -1]} 
+  server s[0] , user: 'deploy', roles: s[1..-1]
 end
 
 # server '192.168.1.10', user: 'deploy', port: 22, roles: %w{web app}, primary: true
