@@ -1,0 +1,22 @@
+
+div.row
+	div.span6.offset3
+
+		h2 = @title
+
+		= form_for @topic do |f| 
+
+		  = f.label :title 
+		  = f.text_field :title 
+		  br			
+			p
+				= f.file_field :image_file
+			p
+				= f.label :image_url, "Or URL"	 
+				= f.text_field :image_url
+				
+			= f.submit "Create New Topic", class: "btn btn-info"
+			
+			
+	
+		

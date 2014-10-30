@@ -1,0 +1,36 @@
+- provide(:title, 'SubTopics') 
+div
+  h1 = @topic.title 
+         
+div.pull-right
+  = "created by #{show_name(@topic)}"
+br 
+.reddit
+  = link_to "Create New Item", "#{new_topic_sub_topic_path.to_s}", class: "btn btn-info"
+
+  - @sub_topics.each do |sub_topic|
+    div.well.well-small
+      div.media
+        span.score-section.pull-left
+          = link_to upvote_topic_sub_topic_path(id: sub_topic.id) , method: :put
+              - if user_voted(sub_topic.id)
+                i.fa.fa-thumbs-up.on
+              - else
+                i.fa.fa-thumbs-up.off 
+              span.score = sub_topic.score 
+        span.pull-right  
+          = sub_topic.comments.count.to_s + " " 
+          i.icon-large.icon-comment 
+        div.media-body
+          h4.media-heading 
+            = link_to "#{sub_topic.title} ", "#{topic_sub_topic_path(params[:topic_id], sub_topic.id)}"
+            -if !sub_topic.url.blank?
+              a.i.fa.fa-link href = sub_topic.url
+          br
+            = sub_topic.descr 
+          span.pull-right
+            br
+              = "created #{distance_of_time_in_words_to_now(sub_topic.created_at).to_s}" + ' ago by ' "#{show_name(sub_topic)}"
+
+
+     

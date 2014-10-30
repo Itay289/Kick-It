@@ -1,3 +1,5 @@
+require 'database_cleaner'
+
 namespace :dbtest do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -21,17 +23,8 @@ namespace :dbtest do
 end
 
 def clean_data
-	users = User.all
-	users.each { |user| user.destroy() }
-
-	topics = Topic.all
-	topics.each { |topic| topic.destroy() }
-
-	sub_topics = Sub_topic.all
-	sub_topics.each { |sub| sub.destroy()}
-
-	# comments = Comment.all
-	# comments.each { |com| com.destroy()}
+  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.clean
 end
 
 def update_users
@@ -43,7 +36,6 @@ def update_users
 
 	names.each do |name|
 		user = User.create({
-			:name => name,
 			:mail => name + '@ftbpro.com',
 			})
 	end
@@ -53,10 +45,11 @@ def update_topic
 	users = User.all
 
 	5.times do
+    user = users.sample
 		topic = Topic.create({
 			:title => Faker::Lorem.word,
-			:image => 'imageplaceholder',
-			:created_by => users.sample.mail,
+			:created_by => user.mail,
+      :image_file => "/uploads/default" + rand(1..6).to_s + ".png"
 		})
 	end
 end
@@ -68,32 +61,32 @@ def update_sub_topic
 	topics.each do |topic|
 		5.times do
 			sample_users = users.sample(rand(1..7))
-			sub = Sub_topic.create({
-			:title => Faker::Lorem.sentence,
-			:created_by => users.sample.mail,
-			:desc => Faker::Lorem.paragraph,
-			:users => [{ :mail => 'shahaf255@.com' , :vote => 1}],
-			:score => rand(-7..7),
-			:topic => topic.title,
-			})
+			topic.sub_topics << SubTopic.new(
+  			:title => Faker::Lorem.sentence,
+  			:created_by => users.sample.mail,
+  			:descr => Faker::Lorem.paragraph,
+  			:score => rand(-7..7),
+			  )
+      topic.save
 		end
 	end
 end
 
 def update_comments
+  topics = Topic.all
 	users = User.all
-	sub_topics = Sub_topic.all
-	sub_topics.each do |sub_topic|
-		sample_users = users.sample(rand(1..7))
-		sample_users.each do |user|
-      sub_topic.comments << Comment.new(
-        :name => user.name,
-        :mail => user.mail,
-        :body => Faker::Lorem.sentence,
-        )
-      sub_topic.save
-		end
-	end
-          #  Sub_topic.all(:conditions => {'comments.name' => 'shahaf'})
-end
 
+  topics.each do |topic|
+    sub_topics = topic.sub_topics
+    sub_topics.each do |sub_t|
+      sample_users = users.sample(rand(1..7))
+      sample_users.each do |user|
+        sub_t.comments << Comment.new(
+          :mail => user.mail,
+          :body => Faker::Lorem.sentence,
+          )
+        topic.save
+      end
+    end
+  end
+ end

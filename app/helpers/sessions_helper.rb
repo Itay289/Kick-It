@@ -1,7 +1,7 @@
 module SessionsHelper
 
 	def sign_in(user)
-		cookies.permanent[:email] = user.mail
+		cookies.permanent[:mail] = user.mail
 		self.current_user =  user
 	end
 
@@ -14,7 +14,7 @@ module SessionsHelper
 	end
 
 	def current_user
-		@current_user ||= User.find_by_remember_token(cookies[:email]) if cookies[:email]
+		@current_user ||= User.find_by(mail: cookies[:mail]) if cookies[:mail]
 	end
 
 	def current_user?(user)
@@ -23,11 +23,12 @@ module SessionsHelper
 
 	def sign_out
 		self.current_user = nil
-		cookies.delete(:email)
+		cookies.delete(:mail)
+		flash[:success] = "See ya"
 	end
 
 	def store_location
-		session[:return_to] = request.fullpath
+		session[:return_to] = request.fullpath.gsub( /\/comments\?.*/, "" )
 	end
 
 	def redirect_back_or(default)
@@ -41,4 +42,10 @@ module SessionsHelper
       redirect_to signin_path, notice: "Please sign in." unless signed_in?
     end  
   end
+
+  def correct_user
+      @user = User.find(params[:id])
+      redirect_to root_path unless current_user?(@user)
+  end
+
 end

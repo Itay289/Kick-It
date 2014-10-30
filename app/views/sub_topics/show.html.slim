@@ -1,0 +1,22 @@
+
+span.pull-right 
+  -if current_user && current_user.mail == @sub_topic.created_by
+    .btn-group
+      button.btn.btn-default = 'Admin Actions'
+      button.btn.btn-default.dropdown-toggle data-toggle="dropdown"
+        span.caret
+        span.sr-only 
+
+      ul.dropdown-menu role="menu"
+        li 
+          = link_to "Remove ", SubTopic.find_by(id: params[:id]), method: :delete, data: { confirm: "You sure?" }   
+          = link_to "Edit", edit_topic_sub_topic_path(id: params[:id])
+h4 =link_to "#{@topic.title} > ", topic_sub_topics_path(@topic.title)          
+h1.sub-topic-title = "#{@sub_topic.title}"  
+
+.desc = @sub_topic.descr 
+span.pull-right = "Created by: #{@sub_topic.created_by.split('@').first}"
+
+
+
+= render partial: 'comments/comment'

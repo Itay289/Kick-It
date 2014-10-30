@@ -1,0 +1,18 @@
+div.row
+	div.span6.offset3
+
+		h2 = @title
+
+		= form_for ([@topic, @subtopic]) do |f| 
+			  = f.label :title 
+			  br
+				= f.text_field :title
+				= f.label :description, 'Description'
+				br
+				= f.text_area :descr
+				br 
+				= f.label :url , "Link to (optional)"
+				= f.text_field :url
+
+				= f.submit "Create New Reddit", class: "btn btn-info" 
+				

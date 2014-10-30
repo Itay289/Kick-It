@@ -1,32 +1,28 @@
 class CommentsController < ApplicationController
+  before_filter :signed_in_user, only: [:create]
 
-	def show 
+	def new 
+    @topic = Topic.where(active: true).find_by(title: params[:topic_id])
+    @subtopic = @topic.sub_topics.where(active: true).find_by(id: params[:id])
     @comment = Comment.new
-  end 
-
-  def new
-    @comment = Comment.new()
-  end 
+  end  
 
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
-    if @comment.save
-      flash[:notice] = "your comment #{@comment.body } has been saved"
+    @topic = Topic.find_by(title: params[:topic_id])
+    @subtopic = @topic.sub_topics.where(active: true).find_by(id: params[:id])
+    comment = Comment.new(
+      :mail => cookies[:mail],
+      :body => params[:comment][:body],
+
+      )
+    @subtopic.comments << comment
+    @subtopic.save
+    redirect_to topic_sub_topic_path(:id => @subtopic.id)
+  end
+
+  private
+    def comment_params
+      params.require(:comment).permit(:mail, :body)
     end
-      redirect_to post_path(@post)  
-  end
-
-  def index
-    @comment = Comment.all
-    if @comment > 0
-      Comment.count
-     end 
-  end
-
-  # private
-  #   def comment_params
-  #     params.require(:comment).permit(:user, :body)
-  #   end
-
+    
 end

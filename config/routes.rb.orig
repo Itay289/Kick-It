@@ -1,0 +1,22 @@
+Rails.application.routes.draw do
+
+  root to: 'topics#index'
+
+  resources :topics do
+  	resources :subtopics do
+<<<<<<< HEAD
+    	resources :comments
+    end
+  end
+=======
+      resources :comments
+    end
+  end	
+>>>>>>> 53cfa11727a8b7a2724807211223c4e03490401e
+  
+  resources :sessions
+  
+  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signin', to: 'sessions#new', via: :get
+
+end

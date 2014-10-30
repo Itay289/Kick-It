@@ -1,0 +1,15 @@
+
+header.navbar.navbar-fixed-top
+  div.navbar-inner
+    div.container
+      = link_to "Kick-it", root_path, id: "logo" 
+      nav
+        ul.nav.pull-right
+          li = link_to "Home", root_path 
+          - if signed_in? 
+            li
+              = link_to "Welcome #{current_user.mail}" 
+            li 
+              = link_to "Sign out", signout_path, method: :delete 
+          - else 
+            li = link_to "Sign in", new_session_path 

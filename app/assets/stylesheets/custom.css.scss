@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 
 /* mixins, variables, etc. */
 
@@ -255,3 +256,96 @@ aside {
   width: 360px;
   line-height: 20px;
 }    
+
+.comments {
+  float: left;
+  .text {
+    width: 400px;
+  }
+}
+.desc {
+  border-bottom: solid 1px;
+  padding-bottom: 20px;
+}
+.comment-headline {
+  text-align: left;
+  margin-top: 60px;
+}
+.small {
+  border: transparent;
+  padding: 6px;
+  background-color: #F0F0F0;
+  margin-top: 5px;
+  li {
+    list-style: none;
+  }
+}
+.reddit {
+  margin-top: 15px;
+}
+
+.fa.fa-thumbs-up.on {
+    color: #0066FF;
+    font-size: 20px;
+  }
+.fa.fa-thumbs-up.off {
+    color: black;
+    font-size: 20px;
+  }
+
+
+.link {
+  float: right;
+}
+.btn {
+  margin-bottom: 20px;
+}
+.thumbnail:hover {
+  opacity:0.8;
+  transform:scale(0.95,0.95);
+}
+.sub-topic-title {
+  text-align: left;
+}
+.comment-section {
+  width: 400px;
+}
+.comment-body {
+  
+}
+.created-at {
+  font-size: 14px;
+  color: #999;
+}
+.comment-add {
+  text-align: left;
+  margin-top: 30px;
+}
+.comment-container {
+  display: inline-flex;
+  margin-bottom: 30px;
+  border-bottom: solid 2px;
+  border-bottom-color: #F0F0F0;
+}
+.icon-user {
+  margin-right: 11px;
+  margin-top: 4px;
+}
+.created-by {
+  font-weight: bolder; 
+}
+.switch {
+  color: red;
+}
+.score {
+  font-size: 20px;
+}
+.score-section {
+  width: 25px;
+}
+.fa.fa-link {
+  font-size: 20px;
+  color: #0066FF;
+}
+
+

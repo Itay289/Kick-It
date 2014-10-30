@@ -1,6 +1,7 @@
 class User
-	include MongoMapper::Document
+	include Mongoid::Document
 	
-	key :name , String
-	key :mail , String
+	field :mail , type: String
+
+	validates :mail, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 end
