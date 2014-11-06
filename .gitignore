@@ -18,3 +18,4 @@
 .rspec
 tags
 tags
+public/uploads/*
