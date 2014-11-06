@@ -7,11 +7,11 @@ div.row
 			  = f.label :title 
 			  br
 				= f.text_field :title
-				= f.label :description, 'Description'
+				= f.label :description, 'Description (Optional)'
 				br
 				= f.text_area :descr
 				br 
-				= f.label :url , "Link to (optional)"
+				= f.label :url , "Link (Optional)"
 				= f.text_field :url
 
 				= f.submit "Create New Reddit", class: "btn btn-info" 
