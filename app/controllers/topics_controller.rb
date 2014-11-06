@@ -25,6 +25,7 @@ class TopicsController < ApplicationController
     uploader_image_url.store!
 		@topic = Topic.new(
 			title: params[:topic][:title],
+      description: params[:topic][:description],
       image_file: uploader_image_file.url,
       image_url: uploader_image_url.url,
 			created_by: cookies[:mail],

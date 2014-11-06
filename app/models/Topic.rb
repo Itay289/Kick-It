@@ -5,6 +5,7 @@ class Topic
   field :title , type: String
   field :image_file, type: String, default: "/uploads/default1.png"
   field :image_url, type: String
+  field :description, type: String
 	field :created_by , type: String
   field :active , type: Boolean , default: true
 
