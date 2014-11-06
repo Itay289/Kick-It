@@ -80,7 +80,7 @@ class TopicsController < ApplicationController
     end
 
     def secure_params
-      params.require(:topic).permit(:title, :image_file, :image_url)
+      params.require(:topic).permit(:title, :image_file, :image_url, :description)
     end
 	
 end
