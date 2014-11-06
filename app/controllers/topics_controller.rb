@@ -19,15 +19,11 @@ class TopicsController < ApplicationController
 		uploader_image_file = ImageUploader.new
     uploader_image_file.store!(params[:topic][:image_file])
 
-    # if image is a url
-    uploader_image_url = ImageUploader.new
-    uploader_image_url.download! params[:topic][:image_url]
-    uploader_image_url.store!
 		@topic = Topic.new(
 			title: params[:topic][:title],
       description: params[:topic][:description],
       image_file: uploader_image_file.url,
-      image_url: uploader_image_url.url,
+      image_url: params[:topic][:image_url],
 			created_by: cookies[:mail],
 			)
 		if @topic.save
@@ -65,13 +61,7 @@ class TopicsController < ApplicationController
   	uploader_image_file = ImageUploader.new
     uploader_image_file.store!(params[:topic][:image_file])
 
-    # if image is a url
-    uploader_image_url = ImageUploader.new
-    uploader_image_url.download! params[:topic][:image_url]
-    uploader_image_url.store!
-
     params[:topic][:image_file] = uploader_image_file.url
-    params[:topic][:image_url] = uploader_image_url.url
     @topic = Topic.find_by(title: params[:id])
     if @topic.update(secure_params)
       flash[:notice] = "Your Kick #{@topic.title} has been updated" 
