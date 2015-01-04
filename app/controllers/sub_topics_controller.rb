@@ -33,13 +33,14 @@ class SubTopicsController < ApplicationController
       :created_by => cookies[:mail],
       :descr => params[:sub_topic][:descr],
       :title => params[:sub_topic][:title],
-      url: params[:sub_topic][:url]
+      url: params[:sub_topic][:url],
+      anonymous: params[:sub_topic][:anonymous]
       )
     if topic.save
   		flash[:success] = "Subject created successfully"
   		redirect_to topic_sub_topics_path
     else
-      flash[:error] = "Fields can't be blank, description can't be less than 30 characters"
+      flash[:error] = "Fields can't be blank"
       redirect_to :back  
     end  
 	end

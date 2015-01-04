@@ -13,6 +13,11 @@ div.row
 				br 
 				= f.label :url , "Link (Optional)"
 				= f.text_field :url
+				br
+				.anonymous
+					.an-checkbox= f.check_box :anonymous
+					.an-label= f.label :anonymous, 'Post anonymously'
+				
 
 				= f.submit "Create New Reddit", class: "btn btn-info" 
 				

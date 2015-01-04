@@ -8,6 +8,7 @@ class SubTopic
 	field :score , type: Integer , default: 0
   field :active , type: Boolean , default: true
   field :url, type: String
+  field :anonymous, type: Boolean , default: false
   
   embedded_in :topic
   embeds_many :comments
