@@ -29,13 +29,23 @@ class SubTopicsController < ApplicationController
 
 	def create
     topic = Topic.find_by(title: params[:topic_id])
-    topic.sub_topics << SubTopic.new(
-      :created_by => cookies[:mail],
-      :descr => params[:sub_topic][:descr],
-      :title => params[:sub_topic][:title],
-      url: params[:sub_topic][:url],
-      anonymous: params[:sub_topic][:anonymous]
-      )
+    if params[:sub_topic][:anonymous] == "1"
+      topic.sub_topics << SubTopic.new(
+        :created_by => "anonymous@90min.com",
+        :descr => params[:sub_topic][:descr],
+        :title => params[:sub_topic][:title],
+        url: params[:sub_topic][:url],
+        anonymous: params[:sub_topic][:anonymous]
+        )
+    else  
+      topic.sub_topics << SubTopic.new(
+        :created_by => cookies[:mail],
+        :descr => params[:sub_topic][:descr],
+        :title => params[:sub_topic][:title],
+        url: params[:sub_topic][:url],
+        anonymous: params[:sub_topic][:anonymous]
+        )
+    end  
     if topic.save
   		flash[:success] = "Subject created successfully"
   		redirect_to topic_sub_topics_path
@@ -46,7 +56,9 @@ class SubTopicsController < ApplicationController
 	end
 
 	def destroy
-    if current_user.mail == owner_of(params[:topic_id], params[:id])
+    @topic = Topic.where(active: true).find_by(title: params[:topic_id])
+    @sub_topic = @topic.sub_topics.where(active: true).find_by(_id: params[:id])
+    if @sub_topic.can_edit?(current_user)
       Topic.find_by(title: params[:topic_id]).sub_topics.find_by(id: params[:id]).set(active: false)
 		  flash[:success] = "Subject destroyed." 
       redirect_to topic_sub_topics_path
@@ -60,7 +72,7 @@ class SubTopicsController < ApplicationController
     @title = "Update Your Kick"
     @topic = Topic.find_by(title: params[:topic_id])
     @subtopic = @topic.sub_topics.find_by(id: params[:id])
-    if current_user.mail != @subtopic.created_by
+    if current_user.mail != @subtopic.created_by && !current_user.admin?
       flash[:notice] ="Sorry, you can't edit this Kick"
       redirect_to :back
     end

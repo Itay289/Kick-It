@@ -16,4 +16,8 @@ class SubTopic
 
   validates :title, presence: true 
 
+  def can_edit?(user)
+    self.created_by == user.mail || user.admin?
+  end
+
 end

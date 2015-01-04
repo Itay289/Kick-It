@@ -1,6 +1,6 @@
 
 span.pull-right 
-  -if current_user && current_user.mail == @sub_topic.created_by
+  -if current_user && @sub_topic.can_edit?(current_user)
     .btn-group
       button.btn.btn-default = 'Admin Actions'
       button.btn.btn-default.dropdown-toggle data-toggle="dropdown"
