@@ -81,7 +81,9 @@ p {
     text-decoration: none;
   }
 }
-
+// .90min {
+//   float: left;
+// }
 /* footer */
 
 footer {
@@ -141,6 +143,11 @@ aside {
       margin-top: 0px;
     }
   }
+}
+.ninety-min {
+  float: left;
+  margin-right: 5px;
+  width: 123px;
 }
 
 .stats {

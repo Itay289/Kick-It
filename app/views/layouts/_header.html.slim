@@ -2,8 +2,10 @@
 header.navbar.navbar-fixed-top
   div.navbar-inner
     div.container
-      .90min 
-        = image_tag "90min.png"
+      .ninety-min    
+        = link_to "http://www.90min.com/", target: "blank" do  
+          = image_tag("90min.png")
+        end  
       = link_to "Kick-it", root_path, id: "logo" 
       nav
         ul.nav.pull-right
