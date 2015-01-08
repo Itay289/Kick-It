@@ -20,6 +20,10 @@ class Topic
   def image
     image_url.blank? ? image_file : image_url
   end
+
+  def can_edit?(user)
+    self.created_by == user.mail || user.admin?
+  end
     
 end
 

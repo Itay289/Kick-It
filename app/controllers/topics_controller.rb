@@ -36,7 +36,8 @@ class TopicsController < ApplicationController
 	end
 
 	def destroy	
-		if current_user.mail == Topic.find_by(title: params[:id]).created_by
+    @topic = Topic.find_by(title: params[:id])
+		if @topic.can_edit?(current_user)
 			@topic.set(active: false)
 			flash[:success] = "Kick destroyed."
 			redirect_to :back
@@ -49,7 +50,7 @@ class TopicsController < ApplicationController
 	def edit
     @title = "Edit Your Kick"
     @topic = Topic.find_by(title: params[:id])
-    if current_user.mail != @topic.created_by
+    if current_user.mail != @topic.created_by && !current_user.admin?
       flash[:notice] ="Sorry, you can't edit this Kick"
       redirect_to :back
     end  

@@ -10,7 +10,7 @@ div.topic-read
    - @topics.each do |topic|
     li.span4 
       div.pull-right
-        -if current_user && current_user.mail == topic.created_by
+        -if current_user && topic.can_edit?(current_user)
 
           = link_to "Remove ", topic, method: :delete, data: { confirm: "You sure?" }                   
           a.i.icon-large.icon-pencil href = edit_topic_path(id: topic.title)
