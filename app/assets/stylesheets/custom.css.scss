@@ -155,12 +155,13 @@ aside {
 .topic-title {
   position: absolute;
   color: white; 
-  font: bold 19px/19px Helvetica, Sans-Serif;   
+  font: bold 28px/28px Helvetica, Sans-Serif;   
   background: rgb(0, 0, 0); /* fallback color */
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   padding: 6px; 
   border-radius: 7px;
   margin: 5px;
+  bottom: 0;
 }
 
 .stats {
