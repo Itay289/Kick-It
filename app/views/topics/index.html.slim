@@ -14,6 +14,7 @@ div.topic-read
 
           = link_to "Remove ", topic, method: :delete, data: { confirm: "You sure?" }                   
           a.i.icon-large.icon-pencil href = edit_topic_path(id: topic.title)
-      = topic.title 
-       
-      = link_to image_tag(topic.image) , topic_sub_topics_path(topic_id: topic.title) , class: "thumbnail"
+        .topic-image   
+          .topic-title= topic.title 
+           
+          = link_to image_tag(topic.image) , topic_sub_topics_path(topic_id: topic.title) , class: "thumbnail"
